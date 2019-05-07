@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bootup_view">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/blue_bg1"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"/>
+
+    <ImageView
+        android:id="@+id/main_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingBottom="30dp"
+        android:src="@drawable/sodalis_logo"
+        android:maxWidth="200dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"/>
+
+    <com.daimajia.numberprogressbar.NumberProgressBar
+        android:id="@+id/boot_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_logo"
+        android:paddingLeft="60dp"
+        android:paddingRight="60dp"
+        custom:progress_unreached_color="#CCCCCC"
+        custom:progress_reached_color="@color/colorPrimary"
+        custom:progress_unreached_bar_height="1dp"
+        custom:progress_reached_bar_height="2dp"
+        custom:progress_text_visibility="invisible" />
+
+</RelativeLayout>

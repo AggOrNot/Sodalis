@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/eggshell_bg">
+
+    <ImageView
+        android:id="@+id/purchase_coins_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/logo_small"/>
+
+    <TextView
+        android:id="@+id/purchase_coins_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_coins_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="@string/purchase_coins_text"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+        android:id="@+id/purchase_coins20_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_coins_title"
+        android:layout_alignLeft="@id/purchase_coins_title"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="40dp"
+        android:text="@string/purchase_twenty"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic"/>
+
+    <Button
+        android:id="@+id/purchase_coins20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_coins20_text"
+        android:layout_alignLeft="@id/purchase_coins_title"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:text="@string/purchase_one_amount"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"
+        style="?android:attr/borderlessButtonStyle"/>
+
+    <TextView
+        android:id="@+id/purchase_coins60_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_coins_title"
+        android:layout_alignRight="@id/purchase_coins_title"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="40dp"
+        android:text="@string/purchase_sixty"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic"/>
+
+    <Button
+        android:id="@+id/purchase_coins60"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_coins60_text"
+        android:layout_alignRight="@id/purchase_coins_title"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:text="@string/four99"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"
+        style="?android:attr/borderlessButtonStyle"/>
+
+    <TextView
+        android:id="@+id/purchase_coins250_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_coins20"
+        android:layout_alignLeft="@id/purchase_coins_title"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="40dp"
+        android:text="@string/purchase_250"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic"/>
+
+    <Button
+        android:id="@+id/purchase_coins250"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_coins250_text"
+        android:layout_alignLeft="@id/purchase_coins_title"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:text="@string/nineteen99"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"
+        style="?android:attr/borderlessButtonStyle"/>
+
+    <TextView
+        android:id="@+id/purchase_coins550_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_coins60"
+        android:layout_alignRight="@id/purchase_coins_title"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="40dp"
+        android:text="@string/purchase_550"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic"/>
+
+    <Button
+        android:id="@+id/purchase_coins550"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_coins550_text"
+        android:layout_alignRight="@id/purchase_coins_title"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:text="@string/ninety999"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"
+        style="?android:attr/borderlessButtonStyle"/>
+
+    <ImageView
+        android:id="@+id/coins_image_purchase"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/coins_icon_grey"/>
+
+    <TextView
+        android:id="@+id/coins_amount_purcahse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/coins_image_purchase"
+        android:layout_alignTop="@id/coins_image_purchase"
+        android:paddingTop="5dp"
+        android:text="0"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/colorMenuGrey"/>
+
+</RelativeLayout>

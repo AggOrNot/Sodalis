@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="40dp"
+    android:id="@+id/fragment_firstboot">
+
+    <TextView
+        android:id="@+id/companion_text_area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textAlignment="center" />
+
+    <View
+        android:id="@+id/typing_circle1"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/typing_circle" />
+
+    <View
+        android:id="@+id/typing_circle2"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_below="@id/typing_circle1"
+        android:layout_alignRight="@id/typing_circle1"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/typing_circle" />
+
+    <View
+        android:id="@+id/typing_circle3"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_below="@id/typing_circle1"
+        android:layout_alignLeft="@id/typing_circle1"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/typing_circle"/>
+
+    <View
+        android:id="@+id/crop_divider"
+        style="@style/Divider"
+        android:layout_height="1dp"
+        android:layout_below="@id/companion_text_area"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#728878" />
+
+    <TextView
+        android:id="@+id/user_reply_A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/crop_divider"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:background="@drawable/text_border" />
+
+    <TextView
+        android:id="@+id/user_reply_B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_reply_A"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:background="@drawable/text_border"/>
+
+    <TextView
+        android:id="@+id/user_reply_C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_reply_B"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:background="@drawable/text_border"/>
+
+    <TextView
+        android:id="@+id/user_reply_D"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_reply_C"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:background="@drawable/text_border"/>
+
+    <com.carlosmuvi.segmentedprogressbar.SegmentedProgressBar
+        android:id="@+id/segmented_progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        app:container_color="@color/colorEggshell"
+        app:fill_color="@color/colorAccent"
+        app:gap_size="2dp"
+        app:segment_count="6"/>
+
+    <TextView
+        android:id="@+id/already_have_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_reply_D"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:text="@string/already_have_account"/>
+
+    <FrameLayout
+        android:id="@+id/user_reply_holder_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/crop_divider"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent">
+    </FrameLayout>
+
+</RelativeLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/eggshell_bg">
+
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/blue_bg1"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"/>
+
+    <FrameLayout
+        android:id="@+id/placeholder_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/main_logo_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/eggshell_bg"/>
+
+    <ImageView
+        android:id="@+id/main_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/sodalis_logo"
+        android:maxWidth="200dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"/>
+
+</RelativeLayout>

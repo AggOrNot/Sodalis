@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "648380807811",
+    "firebase_url": "https://sodalis-53c9d.firebaseio.com",
+    "project_id": "sodalis-53c9d",
+    "storage_bucket": "sodalis-53c9d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648380807811:android:325d3cb8d2b1c889",
+        "android_client_info": {
+          "package_name": "com.martin.sodalis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "648380807811-qv1dhcvm1jhkh7aebm4ffckn26nc0b2e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-5BBT6vzwJ2UiiDZ82zcptUgwJzOnCJU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

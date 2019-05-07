@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/eggshell_bg">
+
+    <EditText
+        android:id="@+id/info_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:inputType="textEmailAddress"
+        android:hint="@string/enter_email" />
+
+    <EditText
+        android:id="@+id/info_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/info_email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:inputType="textPassword"
+        android:hint="@string/enter_password" />
+
+    <CheckBox
+        android:id="@+id/show_password_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/info_password"
+        android:layout_alignLeft="@id/info_password"
+        android:text="@string/show_password" />
+
+    <Button
+        android:id="@+id/bday_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/show_password_box"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/enter_bday"
+        style="?android:attr/borderlessButtonStyle" />
+
+    <TextView
+        android:id="@+id/bday_shown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bday_button"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/wheres_mybday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bday_shown"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textSize="12sp"/>
+
+    <Button
+        android:id="@+id/info_done_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bday_button"
+        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@id/info_password"
+        android:layout_alignRight="@id/info_password"
+        android:layout_marginTop="150dp"
+        android:text="@string/done"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"
+        style="?android:attr/borderlessButtonStyle"/>
+
+</RelativeLayout>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="false">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@color/colorEggshell"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"/>
+
+    <TextView
+        android:id="@+id/companion_text_area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"/>
+
+    <View
+        android:id="@+id/typing_circle1"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/typing_circle" />
+
+    <View
+        android:id="@+id/typing_circle2"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_below="@id/typing_circle1"
+        android:layout_alignRight="@id/typing_circle1"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/typing_circle" />
+
+    <View
+        android:id="@+id/typing_circle3"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_below="@id/typing_circle1"
+        android:layout_alignLeft="@id/typing_circle1"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/typing_circle"/>
+
+    <View
+        android:id="@+id/crop_divider"
+        style="@style/Divider"
+        android:layout_height="1dp"
+        android:layout_below="@id/companion_text_area"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:background="#728878" />
+
+    <TextView
+        android:id="@+id/user_reply_A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/crop_divider"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:background="@drawable/text_border" />
+
+    <TextView
+        android:id="@+id/greeting_user_reply_A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/crop_divider"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:background="@drawable/text_border"/>
+
+    <TextView
+        android:id="@+id/user_reply_B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_reply_A"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:background="@drawable/text_border"/>
+
+    <TextView
+        android:id="@+id/greeting_user_reply_B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_reply_B"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:background="@drawable/text_border"/>
+
+    <TextView
+        android:id="@+id/user_reply_C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_reply_B"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:background="@drawable/text_border"/>
+
+    <TextView
+        android:id="@+id/user_reply_D"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_reply_C"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:background="@drawable/text_border"/>
+
+    <!--<ProgressBar
+        android:id="@+id/timer_bar"
+        android:theme="@style/ProgressBarStyle"
+        android:max="100"
+        android:progress="0"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_reply_D"
+        android:layout_alignLeft="@id/crop_divider"
+        android:layout_alignRight="@id/crop_divider"
+        android:layout_marginTop="50dp" />-->
+
+    <TextView
+        android:id="@+id/timed_event_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/timer_bar_new"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="@string/timed_response"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorMenuGrey"/>
+
+    <TextView
+        android:id="@+id/continue_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/timer_bar_new"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="@string/continue_prompt"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorMenuGrey"/>
+
+    <com.daimajia.numberprogressbar.NumberProgressBar
+        android:id="@+id/timer_bar_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_reply_D"
+        android:layout_alignLeft="@id/crop_divider"
+        android:layout_alignRight="@id/crop_divider"
+        android:layout_marginTop="50dp"
+        custom:progress_unreached_color="#CCCCCC"
+        custom:progress_reached_color="@color/colorPrimary"
+        custom:progress_unreached_bar_height="1dp"
+        custom:progress_reached_bar_height="2dp"
+        custom:progress_text_visibility="invisible"
+        />
+
+    <RelativeLayout android:id="@+id/video_view_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:visibility="gone">
+
+        <VideoView
+            android:id="@+id/video_view_tester"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/videoview_bar"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_centerInParent="true"
+            android:maxWidth="1dp"
+            android:theme="@style/ProgressBarStyle"
+            android:indeterminate="true"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/videoview_dismiss_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="120dp"
+            android:text="@string/video_dismiss"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:alpha="0.9"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

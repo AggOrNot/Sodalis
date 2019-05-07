@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.martin.sodalis">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher_sketch"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_launcher_sketch"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar"
+        tools:replace="android:theme">
+        <activity
+            android:name=".PurchaseAppearancesActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FirstBootActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".InfoEntryActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SelectNameActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BootUp"
+            android:theme="@style/AppTheme.NoActionBar.MainActivity" />
+        <activity
+            android:name=".SignInActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PaywallActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PurchaseActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NoSceneActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChooseOutfitActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewCompanionActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PurchaseCoinsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+    </application>
+
+</manifest>

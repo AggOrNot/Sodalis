@@ -1,0 +1,738 @@
+<resources>
+    <string name="app_name">Sodalis</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- Re-usable responses -->
+    <string name="ok">Ok</string>
+    <string name="got_it">Got it.</string>
+    <string name="ok_got_it">Ok, got it.</string>
+    <string name="next">Next</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="reenter_password">Re-enter Password</string>
+    <string name="show_password">Show Password</string>
+    <string name="enter_bday">Enter Birthday</string>
+    <string name="done">Done</string>
+    <string name="text_spacer">\@sodalis\@sodalis\@sodalis\@sodalis</string>
+    <string name="already_have_account">I already have an account. Sign me in!</string>
+    <string name="timed_response">Timed Response</string>
+    <string name="continue_prompt">Click button to say nothing and continue</string>
+    <string name="video_dismiss">Tap to dismiss</string>
+    <string name="one99">\$1.99</string>
+    <string name="four99">\$4.99</string>
+    <string name="nine99">\$9.99</string>
+    <string name="nineteen99">\$19.99</string>
+    <string name="thirty999">\$39.99</string>
+    <string name="ninety999">\$99.99</string>
+
+    <!-- info entry strings -->
+    <string name="auth_failed">Registration failed. Please try again in a minute.</string>
+    <string name="auth_success">Successfully registered. Welcome to Sodalis!</string>
+    <string name="invalid_email">Please enter a valid email.</string>
+    <string name="show_pw">Show Password</string>
+    <string name="wheres_mybday">Why don\'t I see my birthday?</string>
+    <string name="where_bday_dialog">Sorry, but you need to be at least 18 years old to use
+        Sodalis.</string>
+    <string name="create_account">Create account</string>
+    <string name="done_making_account">I\'ve finished making my account</string>
+    <string name="signin">Please sign in to continue using Sodalis</string>
+
+    <!-- Name strings and array -->
+    <string name="choose_name_prompt">Choose your name</string>
+    <string name="no_name">I don\'t see my name listed</string>
+    <string name="no_name_text">Unfortunately, we are not able to dynamically add names at this time.
+     Because of this we have preset names available to choose from and in a future release you will be
+     able to phonetically enter your name. Thank you for your patience.</string>
+    <string name="choose_name">My name is&#8230;</string>
+    <string-array name="choose_name_array">
+        <item>Aaliyah</item>
+        <item>Aaron</item>
+        <item>Abigail</item>
+        <item>Abram</item>
+        <item>Adalyn</item>
+        <item>Adam</item>
+        <item>Addison</item>
+        <item>Adeline</item>
+        <item>Adrian</item>
+        <item>Aiden</item>
+        <item>Al</item>
+        <item>Alana</item>
+        <item>Alex</item>
+        <item>Alexandra</item>
+        <item>Alexis</item>
+        <item>Alice</item>
+        <item>Allen</item>
+        <item>Allison</item>
+        <item>Alyssa</item>
+        <item>Amanda</item>
+        <item>Amelia</item>
+        <item>Anderson</item>
+        <item>Andrew</item>
+        <item>Andy</item>
+        <item>Angel</item>
+        <item>Angela</item>
+        <item>Anna</item>
+        <item>Anthony</item>
+        <item>Archer</item>
+        <item>Ari</item>
+        <item>Aria</item>
+        <item>Arianna</item>
+        <item>Ash</item>
+        <item>Ashley</item>
+        <item>Aubrey</item>
+        <item>Audrey</item>
+        <item>Austin</item>
+        <item>Autumn</item>
+        <item>Ava</item>
+        <item>Avery</item>
+        <item>Bailey</item>
+        <item>Barnes</item>
+        <item>Barry</item>
+        <item>Bella</item>
+        <item>Ben</item>
+        <item>Bianca</item>
+        <item>Bill</item>
+        <item>Blake</item>
+        <item>Bob</item>
+        <item>Bradley</item>
+        <item>Brayden</item>
+        <item>Brenda</item>
+        <item>Brian</item>
+        <item>Brianna</item>
+        <item>Brock</item>
+        <item>Bruce</item>
+        <item>Cal</item>
+        <item>Caleb</item>
+        <item>Callie</item>
+        <item>Cameron</item>
+        <item>Camilla</item>
+        <item>Carrie</item>
+        <item>Caroline</item>
+        <item>Catherine</item>
+        <item>Charlie</item>
+        <item>Charlotte</item>
+        <item>Chase</item>
+        <item>Cherry</item>
+        <item>Chloe</item>
+        <item>Chris</item>
+        <item>Claire</item>
+        <item>Clark</item>
+        <item>Colin</item>
+        <item>Connor</item>
+        <item>Cooper</item>
+        <item>Cory</item>
+        <item>Courtney</item>
+        <item>Craig</item>
+        <item>Damien</item>
+        <item>Dan</item>
+        <item>Daniel</item>
+        <item>Danny</item>
+        <item>Darren</item>
+        <item>Darryl</item>
+        <item>Dave</item>
+        <item>David</item>
+        <item>Deb</item>
+        <item>Deborah</item>
+        <item>Delaney</item>
+        <item>Dennis</item>
+        <item>Diana</item>
+        <item>Dom</item>
+        <item>Dominic</item>
+        <item>Don</item>
+        <item>Donald</item>
+        <item>Doug</item>
+        <item>Drew</item>
+        <item>Dylan</item>
+        <item>Ed</item>
+        <item>Eddie</item>
+        <item>Eileen</item>
+        <item>Elena</item>
+        <item>Eli</item>
+        <item>Elijah</item>
+        <item>Elizabeth</item>
+        <item>Ella</item>
+        <item>Elliot</item>
+        <item>Emily</item>
+        <item>Emma</item>
+        <item>Eric</item>
+        <item>Erin</item>
+        <item>Ernest</item>
+        <item>Ethan</item>
+        <item>Eugene</item>
+        <item>Eva</item>
+        <item>Evan</item>
+        <item>Evelyn</item>
+        <item>Felipe</item>
+        <item>Finn</item>
+        <item>Fiona</item>
+        <item>Francis</item>
+        <item>Gabriel</item>
+        <item>Gabriella</item>
+        <item>Gary</item>
+        <item>Gavin</item>
+        <item>George</item>
+        <item>Georgia</item>
+        <item>Gerry</item>
+        <item>Glen</item>
+        <item>Gordon</item>
+        <item>Grayson</item>
+        <item>Hailey</item>
+        <item>Han</item>
+        <item>Hannah</item>
+        <item>Harold</item>
+        <item>Harry</item>
+        <item>Hazel</item>
+        <item>Henry</item>
+        <item>Holly</item>
+        <item>Howard</item>
+        <item>Ian</item>
+        <item>Isaac</item>
+        <item>Isabella</item>
+        <item>Isaiah</item>
+        <item>Jack</item>
+        <item>Jackie</item>
+        <item>Jacob</item>
+        <item>Jake</item>
+        <item>James</item>
+        <item>Jasmine</item>
+        <item>Jason</item>
+        <item>Jay</item>
+        <item>Jeff</item>
+        <item>Jennifer</item>
+        <item>Jeremy</item>
+        <item>Jerry</item>
+        <item>Jess</item>
+        <item>Jimmy</item>
+        <item>Joanna</item>
+        <item>Joe</item>
+        <item>Joel</item>
+        <item>John</item>
+        <item>Jonathan</item>
+        <item>Jordan</item>
+        <item>Josh</item>
+        <item>Juan</item>
+        <item>Julia</item>
+        <item>Julian</item>
+        <item>Justin</item>
+        <item>Kaitlyn</item>
+        <item>Kaity</item>
+        <item>Kate</item>
+        <item>Kayla</item>
+        <item>Keira</item>
+        <item>Kelly</item>
+        <item>Ken</item>
+        <item>Kevin</item>
+        <item>Kim</item>
+        <item>Kylie</item>
+        <item>Kyle</item>
+        <item>Laura</item>
+        <item>Lauren</item>
+        <item>Leah</item>
+        <item>Lewis</item>
+        <item>Liam</item>
+        <item>Liliana</item>
+        <item>Lily</item>
+        <item>Lincoln</item>
+        <item>Linda</item>
+        <item>Liz</item>
+        <item>Lucas</item>
+        <item>Lucy</item>
+        <item>Luke</item>
+        <item>Lupe</item>
+        <item>Mackenzie</item>
+        <item>Madeleine</item>
+        <item>Madison</item>
+        <item>Makayla</item>
+        <item>Malcolm</item>
+        <item>Marcus</item>
+        <item>Maria</item>
+        <item>Mark</item>
+        <item>Martin</item>
+        <item>Mart&#237;n</item>
+        <item>Mary</item>
+        <item>Mateo</item>
+        <item>Matt</item>
+        <item>Max</item>
+        <item>Maya</item>
+        <item>Megan</item>
+        <item>Michael</item>
+        <item>Mike</item>
+        <item>Miles</item>
+        <item>Molly</item>
+        <item>Morgan</item>
+        <item>Nancy</item>
+        <item>Natalie</item>
+        <item>Natasha</item>
+        <item>Nate</item>
+        <item>Nathan</item>
+        <item>Nelson</item>
+        <item>Nick</item>
+        <item>Nico</item>
+        <item>Noah</item>
+        <item>Nolan</item>
+        <item>Oliver</item>
+        <item>Olivia</item>
+        <item>Owen</item>
+        <item>Paris</item>
+        <item>Pat</item>
+        <item>Patrick</item>
+        <item>Paul</item>
+        <item>Pete</item>
+        <item>Peyton</item>
+        <item>Phil</item>
+        <item>Quinn</item>
+        <item>Rachael</item>
+        <item>Rafael</item>
+        <item>Ray</item>
+        <item>Richard</item>
+        <item>Rick</item>
+        <item>Riley</item>
+        <item>Rob</item>
+        <item>Ron</item>
+        <item>Rose</item>
+        <item>Roy</item>
+        <item>Ruby</item>
+        <item>Russell</item>
+        <item>Ryan</item>
+        <item>Sam</item>
+        <item>Samantha</item>
+        <item>Sara</item>
+        <item>Savannah</item>
+        <item>Scarlett</item>
+        <item>Scott</item>
+        <item>Sebastian</item>
+        <item>Selena</item>
+        <item>Serena</item>
+        <item>Seth</item>
+        <item>Shane</item>
+        <item>Shannon</item>
+        <item>Sophia</item>
+        <item>Steph</item>
+        <item>Stephen</item>
+        <item>Steve</item>
+        <item>Sydney</item>
+        <item>Taylor</item>
+        <item>Ted</item>
+        <item>Thomas</item>
+        <item>Tim</item>
+        <item>Todd</item>
+        <item>Tom</item>
+        <item>Tracy</item>
+        <item>Tristan</item>
+        <item>Tyler</item>
+        <item>Vic</item>
+        <item>Victoria</item>
+        <item>Violet</item>
+        <item>Vivian</item>
+        <item>Wes</item>
+        <item>Will</item>
+        <item>Wyatt</item>
+        <item>Xavier</item>
+        <item>Zach</item>
+        <item>Zoe</item>
+    </string-array>
+
+    <string-array name="companion_names_female">
+        <item>Aaliyah</item>
+        <item>Abigail</item>
+        <item>Addison</item>
+        <item>Adeline</item>
+        <item>Adrian</item>
+        <item>Aiden</item>
+        <item>Alana</item>
+        <item>Alex</item>
+        <item>Alexandra</item>
+        <item>Alexis</item>
+        <item>Alice</item>
+        <item>Allison</item>
+        <item>Alyssa</item>
+        <item>Amanda</item>
+        <item>Amelia</item>
+        <item>Andy</item>
+        <item>Angel</item>
+        <item>Angela</item>
+        <item>Anna</item>
+        <item>Aria</item>
+        <item>Arianna</item>
+        <item>Ash</item>
+        <item>Ashley</item>
+        <item>Aubrey</item>
+        <item>Audrey</item>
+        <item>Austin</item>
+        <item>Autumn</item>
+        <item>Ava</item>
+        <item>Bailey</item>
+        <item>Bella</item>
+        <item>Bianca</item>
+        <item>Brenda</item>
+        <item>Brianna</item>
+        <item>Callie</item>
+        <item>Cameron</item>
+        <item>Camilla</item>
+        <item>Carrie</item>
+        <item>Caroline</item>
+        <item>Catherine</item>
+        <item>Charlie</item>
+        <item>Charlotte</item>
+        <item>Cherry</item>
+        <item>Chloe</item>
+        <item>Claire</item>
+        <item>Courtney</item>
+        <item>Danny</item>
+        <item>Deb</item>
+        <item>Deborah</item>
+        <item>Delaney</item>
+        <item>Diana</item>
+        <item>Dylan</item>
+        <item>Eileen</item>
+        <item>Elena</item>
+        <item>Eli</item>
+        <item>Elizabeth</item>
+        <item>Ella</item>
+        <item>Emily</item>
+        <item>Emma</item>
+        <item>Erin</item>
+        <item>Eva</item>
+        <item>Evelyn</item>
+        <item>Fiona</item>
+        <item>Francis</item>
+        <item>Gabriella</item>
+        <item>Georgia</item>
+        <item>Hailey</item>
+        <item>Hannah</item>
+        <item>Hazel</item>
+        <item>Holly</item>
+        <item>Isabella</item>
+        <item>Jackie</item>
+        <item>Jasmine</item>
+        <item>Jennifer</item>
+        <item>Jess</item>
+        <item>Joanna</item>
+        <item>Jordan</item>
+        <item>Julia</item>
+        <item>Kaitlyn</item>
+        <item>Kaity</item>
+        <item>Kate</item>
+        <item>Kayla</item>
+        <item>Keira</item>
+        <item>Kelly</item>
+        <item>Kim</item>
+        <item>Kylie</item>
+        <item>Laura</item>
+        <item>Lauren</item>
+        <item>Leah</item>
+        <item>Liliana</item>
+        <item>Lily</item>
+        <item>Linda</item>
+        <item>Liz</item>
+        <item>Lucy</item>
+        <item>Lupe</item>
+        <item>Mackenzie</item>
+        <item>Madeleine</item>
+        <item>Madison</item>
+        <item>Makayla</item>
+        <item>Maria</item>
+        <item>Maya</item>
+        <item>Molly</item>
+        <item>Morgan</item>
+        <item>Nancy</item>
+        <item>Natalie</item>
+        <item>Natasha</item>
+        <item>Olivia</item>
+        <item>Paris</item>
+        <item>Quinn</item>
+        <item>Rachael</item>
+        <item>Ray</item>
+        <item>Riley</item>
+        <item>Rose</item>
+        <item>Ruby</item>
+        <item>Sam</item>
+        <item>Samantha</item>
+        <item>Sara</item>
+        <item>Savannah</item>
+        <item>Scarlett</item>
+        <item>Selena</item>
+        <item>Serena</item>
+        <item>Shannon</item>
+        <item>Sophia</item>
+        <item>Steph</item>
+        <item>Sydney</item>
+        <item>Taylor</item>
+        <item>Tracy</item>
+        <item>Vic</item>
+        <item>Victoria</item>
+        <item>Violet</item>
+        <item>Vivian</item>
+        <item>Zoe</item>
+    </string-array>
+
+    <string-array name="companion_names_male">
+        <item>Aaron</item>
+        <item>Abram</item>
+        <item>Adam</item>
+        <item>Adrian</item>
+        <item>Al</item>
+        <item>Alex</item>
+        <item>Alexis</item>
+        <item>Allen</item>
+        <item>Anderson</item>
+        <item>Andrew</item>
+        <item>Andy</item>
+        <item>Anthony</item>
+        <item>Archer</item>
+        <item>Ari</item>
+        <item>Aubrey</item>
+        <item>Austin</item>
+        <item>Avery</item>
+        <item>Barnes</item>
+        <item>Barry</item>
+        <item>Ben</item>
+        <item>Bill</item>
+        <item>Blake</item>
+        <item>Bob</item>
+        <item>Bradley</item>
+        <item>Brayden</item>
+        <item>Brian</item>
+        <item>Brock</item>
+        <item>Bruce</item>
+        <item>Cal</item>
+        <item>Caleb</item>
+        <item>Cameron</item>
+        <item>Charlie</item>
+        <item>Chase</item>
+        <item>Chris</item>
+        <item>Clark</item>
+        <item>Colin</item>
+        <item>Connor</item>
+        <item>Cooper</item>
+        <item>Cory</item>
+        <item>Craig</item>
+        <item>Damien</item>
+        <item>Dan</item>
+        <item>Daniel</item>
+        <item>Danny</item>
+        <item>Darren</item>
+        <item>Darryl</item>
+        <item>Dave</item>
+        <item>David</item>
+        <item>Dennis</item>
+        <item>Dom</item>
+        <item>Dominic</item>
+        <item>Don</item>
+        <item>Donald</item>
+        <item>Doug</item>
+        <item>Dylan</item>
+        <item>Ed</item>
+        <item>Eddie</item>
+        <item>Eli</item>
+        <item>Elijah</item>
+        <item>Eric</item>
+        <item>Ernest</item>
+        <item>Ethan</item>
+        <item>Eugene</item>
+        <item>Evan</item>
+        <item>Felipe</item>
+        <item>Finn</item>
+        <item>Francis</item>
+        <item>Gabriel</item>
+        <item>Gary</item>
+        <item>Gavin</item>
+        <item>George</item>
+        <item>Glen</item>
+        <item>Gordon</item>
+        <item>Grayson</item>
+        <item>Han</item>
+        <item>Harold</item>
+        <item>Harry</item>
+        <item>Henry</item>
+        <item>Howard</item>
+        <item>Ian</item>
+        <item>Isaac</item>
+        <item>Isaiah</item>
+        <item>Jack</item>
+        <item>Jacob</item>
+        <item>Jake</item>
+        <item>James</item>
+        <item>Jason</item>
+        <item>Jay</item>
+        <item>Jeff</item>
+        <item>Jeremy</item>
+        <item>Jerry</item>
+        <item>Jimmy</item>
+        <item>Joe</item>
+        <item>Joel</item>
+        <item>John</item>
+        <item>Jonathan</item>
+        <item>Jordan</item>
+        <item>Josh</item>
+        <item>Juan</item>
+        <item>Julian</item>
+        <item>Justin</item>
+        <item>Ken</item>
+        <item>Kevin</item>
+        <item>Kyle</item>
+        <item>Lewis</item>
+        <item>Liam</item>
+        <item>Lincoln</item>
+        <item>Lucas</item>
+        <item>Luke</item>
+        <item>Malcolm</item>
+        <item>Marcus</item>
+        <item>Mark</item>
+        <item>Martin</item>
+        <item>Mart&#237;n</item>
+        <item>Mateo</item>
+        <item>Matt</item>
+        <item>Max</item>
+        <item>Michael</item>
+        <item>Mike</item>
+        <item>Miles</item>
+        <item>Nate</item>
+        <item>Nathan</item>
+        <item>Nelson</item>
+        <item>Nick</item>
+        <item>Nico</item>
+        <item>Noah</item>
+        <item>Nolan</item>
+        <item>Oliver</item>
+        <item>Owen</item>
+        <item>Paris</item>
+        <item>Pat</item>
+        <item>Patrick</item>
+        <item>Paul</item>
+        <item>Pete</item>
+        <item>Phil</item>
+        <item>Quinn</item>
+        <item>Rafael</item>
+        <item>Ray</item>
+        <item>Richard</item>
+        <item>Rick</item>
+        <item>Rob</item>
+        <item>Ron</item>
+        <item>Roy</item>
+        <item>Russell</item>
+        <item>Ryan</item>
+        <item>Sam</item>
+        <item>Scott</item>
+        <item>Sebastian</item>
+        <item>Seth</item>
+        <item>Shane</item>
+        <item>Steph</item>
+        <item>Stephen</item>
+        <item>Steve</item>
+        <item>Sydney</item>
+        <item>Taylor</item>
+        <item>Ted</item>
+        <item>Thomas</item>
+        <item>Tim</item>
+        <item>Todd</item>
+        <item>Tom</item>
+        <item>Tristan</item>
+        <item>Tyler</item>
+        <item>Vic</item>
+        <item>Wes</item>
+        <item>Will</item>
+        <item>Wyatt</item>
+        <item>Xavier</item>
+        <item>Zach</item>
+    </string-array>
+
+    <!-- First boot strings -->
+    <string name="firstboot_welcome_1">Hello! Welcome and thank you for installing Sodalis, your smart
+        Companion for all your personal and professional needs.</string>
+    <string name="firstboot_welcome_2">Please take a moment to read over our Terms of Service. As
+        this is a Beta program, many features including written input and voice recognition, will
+        not be available at this time.</string>
+    <string name="firstboot_welcome_3">Please enter some basic information so we can tie your
+        account to your Companion.</string>
+    <string name="firsboot_welcome_4">Let\'s get started. What is your name?</string>
+
+    <string name="firstboot_welcome_5">Would you like your Companion to have a feminine or masculine voice?</string>
+    <string name="firstboot_reply_5A">Feminine</string>
+    <string name="firstboot_reply_5B">Masculine</string>
+
+    <string name="firstboot_welcome_6">How often would you like to speak with your Companion? This
+        will automatically adjust based on your use, so don\'t feel locked into your answer.</string>
+    <string name="firstboot_reply_6A">Pretty often.</string>
+    <string name="firstboot_reply_6B">A medium amount.</string>
+    <string name="firstboot_reply_6C">Less than average.</string>
+
+    <string name="firstboot_welcome_7">During this Beta period, you will interact with your
+        Companion with preset replies/prompts, in the same way you have been completing your Sodalis
+        registration and set up. Your Companion will explain its capabilities and limitations more
+        in depth once you meet.</string>
+    <string name="firstboot_reply_7A">Ok, got it.</string>
+    <string name="firstboot_reply_7B">That\'s lame.</string>
+    <string name="firstboot_reply_7C">What is this exactly?</string>
+
+    <string name="firstboot_welcome_8">Thank you. Please wait while Sodalis creates your personal
+        Companion.</string>
+
+    <!-- Menu/settings strings -->
+    <string name="settings">Settings</string>
+    <string name="logout">Log Out</string>
+    <string name="settings_privacypol">Read our privacy policy</string>
+    <string name="settings_rateus">Rate us in Google Play</string>
+    <string name="settings_faq">Frequently Asked Questions</string>
+    <string name="settings_contact">Contact Sodalis support</string>
+    <string name="settings_version">Series: 0.1856</string>
+    <string name="settings_view_appearance">View your Companion\'s appearance</string>
+
+    <!-- Paywall strings -->
+    <string name="paywall_title">Error: error.13.server_limit</string>
+    <string name="paywall_explanation">Thank you for using Sodalis! Unfortunately, due to exceptional
+        demand and the high processing stress of maintaining an AI, our servers are currently
+        overloaded. In order to provide the best service and Companion quality, we are slightly
+        limiting access to Sodalis products at this time. Please wait 12 hours in order to continue using your Companion,
+         or skip to the front of the line for a small fee. Don\'t worry, your Companion will not be
+        altered in any way, this is just to relieve some strain off of our
+        servers. Thank you again for your understanding!</string>
+    <string name="paywall_skipline">Skip the line, for only \$1.99!</string>
+    <string name="paywall_time">12:00</string>
+
+    <!-- Purchase skips strings -->
+    <string name="purchase_description">Purchase line skips to immediately resume using your Companion!</string>
+    <string name="purchase_one">1 Skip</string>
+    <string name="purchase_three">3 Skips</string>
+    <string name="purchase_six">6 Skips</string>
+    <string name="purchase_unlimited">Unlimited Skips</string>
+    <string name="purchase_unlimited_info">Unlimited Skips through the entirety of the current series
+    release.</string>
+    <string name="purchase_one_amount">\$1.99</string>
+    <string name="purchase_three_amount">\$4.99</string>
+    <string name="purchase_six_amount">\$9.99</string>
+    <string name="purchase_unlimited_amount">\$14.99</string>
+
+    <!-- Purchase coins strings -->
+    <string name="purchase_coins_text">Purchase coins to customize your Companion\'s appearance and
+    secure VIP access!</string>
+    <string name="purchase_twenty">20 Coins</string>
+    <string name="purchase_sixty">60 Coins</string>
+    <string name="purchase_250">250 Coins</string>
+    <string name="purchase_550">550 Coins</string>
+    <string name="purchase_unlimited_coins">Unlocks every appearance and VIP perk through the entirety
+    of the current series release.</string>
+
+    <!-- Appearances strings -->
+    <string name="appearance_prompt">Choose your Companion\'s appearance</string>
+    <string name="appearance_outfit_prompt">Choose your Companion\'s outfit</string>
+    <string name="appearance_finalize">Finalize your Companion\'s appearance</string>
+    <string name="choose_button">Choose this look</string>
+    <string name="choose_premium_button">Premium 20</string>
+    <string name="appearance_done_button">All done!</string>
+    <string name="appearance_notdone_button">Not quite right…</string>
+    <string name="appearance_confirm">Is this your correct selection?</string>
+    <string name="change_appearance">Change Appearance</string>
+
+    <!-- to choose premium button amount, read db to see what's needed and then just do a
+    setText as Premium 20 or whatever inside the button. Simple. -->
+
+    <!-- Misc strings -->
+    <string name="noscene_title">Congratulations!</string>
+    <string name="noscene_description">There are no more scenes written! Hope you enjoyed the demo!
+    Click on the button below to go back to the last important scene.</string>
+    <string name="title_activity_purchase">Purchase</string>
+    <string name="title_activity_purchase_appearances">PurchaseAppearancesActivity</string>
+
+</resources>

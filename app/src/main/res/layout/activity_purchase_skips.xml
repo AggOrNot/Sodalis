@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/eggshell_bg">
+
+    <ImageView
+        android:id="@+id/purchase_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/logo_small"/>
+
+    <TextView
+        android:id="@+id/purchase_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="@string/purchase_description"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+        android:id="@+id/purchase_one_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_title"
+        android:layout_alignLeft="@id/purchase_title"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="50dp"
+        android:text="@string/purchase_one"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic"/>
+
+    <Button
+        android:id="@+id/purchase_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_one_text"
+        android:layout_alignLeft="@id/purchase_title"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:text="@string/purchase_one_amount"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"
+        style="?android:attr/borderlessButtonStyle"/>
+
+    <TextView
+        android:id="@+id/purchase_three_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_title"
+        android:layout_alignRight="@id/purchase_title"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="40dp"
+        android:text="@string/purchase_three"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic"/>
+
+    <Button
+        android:id="@+id/purchase_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_three_text"
+        android:layout_alignRight="@id/purchase_title"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:text="@string/purchase_three_amount"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"
+        style="?android:attr/borderlessButtonStyle"/>
+
+    <TextView
+        android:id="@+id/purchase_six_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_one"
+        android:layout_alignLeft="@id/purchase_title"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="50dp"
+        android:text="@string/purchase_six"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic" />
+
+    <Button
+        android:id="@+id/purchase_six"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_six_text"
+        android:layout_alignLeft="@id/purchase_title"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:text="@string/purchase_six_amount"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"
+        style="?android:attr/borderlessButtonStyle"/>
+
+    <ImageView
+        android:id="@+id/unlimited_info"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignRight="@id/purchase_title"
+        android:layout_above="@id/purchase_unlimited"
+        android:src="@drawable/info_icon"/>
+
+    <TextView
+        android:id="@+id/purchase_unlimited_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_three"
+        android:layout_toLeftOf="@id/unlimited_info"
+        android:layout_marginTop="40dp"
+        android:text="@string/purchase_unlimited"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic" />
+
+    <Button
+        android:id="@+id/purchase_unlimited"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchase_unlimited_text"
+        android:layout_alignRight="@id/purchase_title"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="45dp"
+        android:paddingRight="45dp"
+        android:text="@string/purchase_unlimited_amount"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"
+        style="?android:attr/borderlessButtonStyle"/>
+
+</RelativeLayout>

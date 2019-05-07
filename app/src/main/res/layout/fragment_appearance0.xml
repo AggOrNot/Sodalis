@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.yqritc.scalablevideoview.ScalableVideoView
+        android:id="@+id/video_view_tester"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        app:scalableType="centerCrop"
+        android:visibility="gone"/>
+
+    <!--<VideoView
+        android:id="@+id/video_view_tester"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/> -->
+
+    <ProgressBar
+        android:id="@+id/videoview_bar"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_centerInParent="true"
+        android:maxWidth="1dp"
+        android:theme="@style/ProgressBarStyle"
+        android:indeterminate="true"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/arrow_right"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/arrow_right" />
+
+    <com.romainpiel.shimmer.ShimmerButton
+        android:id="@+id/premium_button0"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="10dp"
+        android:text="@string/choose_premium_button"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic"
+        android:textColor="#ffffff"
+        android:background="#ffd700"
+        app:reflectionColor="@color/colorPrimary"
+        android:drawableRight="@drawable/coins_icon"
+        android:gravity="right|center_vertical"
+        style="?android:attr/borderlessButtonStyle"/>
+
+</RelativeLayout>
