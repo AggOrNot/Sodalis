@@ -1,7 +1,7 @@
 package com.martin.sodalis;
 
 /**
- * Created by Martin on 3/8/18.
+ * local holder to hold Companion text. Probably won't end up using this
  */
 
 public class CompanionText {

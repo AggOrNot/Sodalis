@@ -84,12 +84,12 @@ public class FirstBootFragment extends Fragment {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference();
 
-        // CUSTOM typing circles. These are cool idgaf
+        // CUSTOM typing circles. These are cool
         typingCircle1 = firstBootView.findViewById(R.id.typing_circle1);
         typingCircle2 = firstBootView.findViewById(R.id.typing_circle2);
         typingCircle3 = firstBootView.findViewById(R.id.typing_circle3);
 
-        // progress bar I big ripped from IG, but it's perfect again idgaf
+        // progress bar from an IG clone, but it's perfect idgaf
         segmentedProgressBar = firstBootView.findViewById(R.id.segmented_progressbar);
         segmentedProgressBar.setVisibility(View.GONE);
 
@@ -695,6 +695,7 @@ public class FirstBootFragment extends Fragment {
 
                 String companionVoice = "female";
 
+                // set the value in the user's db node
                 mDatabaseRef.child("users").child(userId).child("companionVoice").setValue(companionVoice);
 
                 Log.i(TAG, "Companion voice: " + companionVoice);
@@ -747,6 +748,7 @@ public class FirstBootFragment extends Fragment {
 
                 String companionVoice = "male";
 
+                // set the value in the user's db node
                 mDatabaseRef.child("users").child(userId).child("companionVoice").setValue(companionVoice);
 
                 Log.i(TAG, "Companion voice: " + companionVoice);
@@ -1133,6 +1135,7 @@ public class FirstBootFragment extends Fragment {
 
         segmentedProgressBar.setVisibility(View.GONE);
 
+        // ends sign up sequence and launches bootup activity once the timer completes
         fadeIn.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -1209,6 +1212,7 @@ public class FirstBootFragment extends Fragment {
         userReplyD.setVisibility(View.GONE);
     }
 
+    // sliding animation used for reply A and C
     public void slideFromRight(View view){
         TranslateAnimation animate = new TranslateAnimation(firstBootView.getWidth(), 0,0,0);
         animate.setDuration(200);
@@ -1217,6 +1221,7 @@ public class FirstBootFragment extends Fragment {
         view.setVisibility(View.VISIBLE);
     }
 
+    // sliding animation used for reply B and D
     public void slideFromLeft(View view){
         TranslateAnimation animate = new TranslateAnimation(-firstBootView.getWidth(),0,0,0);
         animate.setDuration(200);
