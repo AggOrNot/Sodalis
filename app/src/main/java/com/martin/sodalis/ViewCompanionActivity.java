@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -33,6 +34,8 @@ public class ViewCompanionActivity extends AppCompatActivity {
 
     private TextView nameTextview;
 
+    private ImageView backButton;
+
     private String userId;
     private String companionNameMain;
 
@@ -50,7 +53,8 @@ public class ViewCompanionActivity extends AppCompatActivity {
     /**
      * activity that reads user's Companion appearance from their data node and displays it. User can
      * go to their appearance and outfit selection screens from here if they want to change their
-     * Companion's appearance.
+     * Companion's appearance. Plays local videos for now, but is equipped to read correct videos
+     * from db once architecture is finished.
      *
      */
 
@@ -79,8 +83,9 @@ public class ViewCompanionActivity extends AppCompatActivity {
         scalableVideoView = findViewById(R.id.video_view);
         scalableVideoView.setVisibility(View.GONE);
 
-        // initialize and read user's Companion name from db and display
+        // initialize and read user's Companion name from db and display. Hide until loaded
         nameTextview = findViewById(R.id.companion_name);
+        nameTextview.setVisibility(View.GONE);
 
         if ((userId = getUid()) != null) {
 
@@ -97,6 +102,7 @@ public class ViewCompanionActivity extends AppCompatActivity {
                                             companionNameMain);
 
                                     nameTextview.setText(companionNameMain);
+                                    nameTextview.setVisibility(View.VISIBLE);
                                 }
 
                                 @Override
@@ -105,11 +111,15 @@ public class ViewCompanionActivity extends AppCompatActivity {
                                 }
                             }
                     );
+        } else {
+            // show sodalis I guess? I can probably come up with something better at some point
+            nameTextview.setVisibility(View.VISIBLE);
         }
 
         // play video
         playVideoLocal();
 
+        // actual video view to be used later
         /*try {
             playVideoView();
         } catch (IOException e) {
@@ -120,6 +130,20 @@ public class ViewCompanionActivity extends AppCompatActivity {
         changeAppearanceButton = findViewById(R.id.change_appearance_button);
 
         changeAppearanceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // this will eventually be replaced with intent to appearance changes. Need to come
+                // up with an alternative to a 'closet'. But same idea.
+                scalableVideoView.stop();
+                scalableVideoView.release();
+                finish();
+            }
+        });
+
+        // back button
+        backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 scalableVideoView.stop();

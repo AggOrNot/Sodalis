@@ -171,7 +171,7 @@ public class FirstBootFragment extends Fragment {
                                     case "scene6":
                                         scene7();
                                         break;
-                                }
+                                } // other scenes are omitted because the user's saved data isn't relevant
                             }
                         }
 
@@ -277,7 +277,7 @@ public class FirstBootFragment extends Fragment {
     // ok each scene should be fairly descriptive when they matter.
     public void scene2PrivPolicy () {
 
-        // double check to make user hasn't fucked up and had an account already
+        // double check to make user has an account already if on a new device or new download
         alreadyHaveAccount.setVisibility(View.GONE);
 
         hideTypingAnimation();
@@ -295,7 +295,7 @@ public class FirstBootFragment extends Fragment {
 
         // fill dat insta progress bar! :D 1000 feels right btw, can be changed.
         segmentedProgressBar.setVisibility(View.VISIBLE);
-        segmentedProgressBar.playSegment(1000); // fill 1
+        segmentedProgressBar.playSegment(1000); // fill 1 second
 
         // still have to set the terms of service link. Get that squarespace up!
         userReplyA.setOnClickListener(new View.OnClickListener() {
@@ -364,7 +364,7 @@ public class FirstBootFragment extends Fragment {
 
         if (mFirebaseUser == null) {
 
-            // Not signed in, user still needs to create account
+            // Not signed in, user still needs to create account, get it rolling
             userReplyA.setText(R.string.create_account);
             userReplyA.setVisibility(View.VISIBLE);
 
@@ -787,7 +787,8 @@ public class FirstBootFragment extends Fragment {
         });
     }
 
-    public void scene6() { // how often speak with companion
+    // how often speak with companion, this doesn't actually do anything yet, mostly for immersion
+    public void scene6() {
 
         hideTypingAnimation();
 
@@ -950,7 +951,8 @@ public class FirstBootFragment extends Fragment {
         });
     }
 
-    public void scene7() { // quick rundown
+    // quick rundown. One more immersion exposition thing really
+    public void scene7() {
 
         hideTypingAnimation();
 

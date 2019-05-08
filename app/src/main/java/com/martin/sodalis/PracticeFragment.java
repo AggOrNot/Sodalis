@@ -62,6 +62,8 @@ import java.util.TimeZone;
  * will basically be in progress for the entirety of the app. I used to hate how I named it practice
  * fragment, but now I kind of like it. We'll see! There is a lot of stuff here that I feel like I
  * need to keep, but I probably don't need anymore if someone other than me took a look at it.
+ * There are many lines that are commented out purposely to be used later or that may be needed at
+ * some point.
  *
  */
 
@@ -709,21 +711,13 @@ public class PracticeFragment extends Fragment {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
+    // gets whatever the Companion says from the db and checks to see if it has any custom modifiers
+    // and preps the UI and audio as needed.
     public void getCompanionText() {
 
         //fetchAudioUrlFromFirebase();
 
         checkForModifierFlag();
-
-        /*if (isModifierFlagPresent = checkForModifierFlag()) { // is true, new logic
-
-            Log.i("checkModifier", "These should be firing");
-
-            // launches paywall if present, still fires everything in background
-            checkForPaywall();
-            checkForTimedEvent();
-            checkForKeySceneFlag();
-        }*/
 
         // set scene id to be used later
         String localUserSceneId = userSceneIdGetter();
@@ -841,6 +835,9 @@ public class PracticeFragment extends Fragment {
                                     cText = new CompanionText(companionText.toString());
 
                                 } else {
+                                    // else there's an issue with the scene id or something and this
+                                    // will ideally catch it and launch the temporary no scene
+                                    // activity to prevent complete crashes
                                     Intent iNoScene = new Intent(getActivity(), NoSceneActivity.class);
                                     startActivity(iNoScene);
 
@@ -850,6 +847,9 @@ public class PracticeFragment extends Fragment {
 
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
+                                // if there's an issue with the scene id or something and this
+                                // will ideally catch it and launch the temporary no scene
+                                // activity to prevent complete crashes
                                 Intent iNoScene = new Intent(getActivity(), NoSceneActivity.class);
                                 startActivity(iNoScene);
 
@@ -859,6 +859,7 @@ public class PracticeFragment extends Fragment {
                 );
     }
 
+    // logic for getting the corresponding user reply to the companion text. A and B are used the most
     public void getUserReplyA() {
 
         mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)
@@ -906,6 +907,7 @@ public class PracticeFragment extends Fragment {
 
                                                             String localReplyIdToUse;
 
+                                                            // builds reply id based on scene id
                                                             if (getNewReplyId() != null) {
 
                                                                 localReplyIdToUse = getNewReplyId()
@@ -927,15 +929,12 @@ public class PracticeFragment extends Fragment {
                                                                 localReplyIdToUse = userSceneIdGetter()
                                                                         .replace("scene", "");
 
-                                                                // this sort of worked previously
-                                                                //localReplyIdToUse = localReplyIdToUse + "_"
-                                                                //        + (sceneNumber - 1) + "A";
-
                                                                 // this so far seems to be for sure working
                                                                 localReplyIdToUse = localReplyIdToUse + "_"
                                                                         + readAndReturnSceneNumber(localSceneIdToUse) + "A";
                                                             }
 
+                                                            // shoots back the chain to see if it's correct
                                                             Log.i("getUserReplyA",
                                                                     "Reference chain: "
                                                                             + localSceneIdToUse + " " +
@@ -964,6 +963,7 @@ public class PracticeFragment extends Fragment {
                                                                                         String newString = replyString
                                                                                                 .replace("companionName", companionName);
 
+                                                                                        // show the good stuff
                                                                                         userReplyA.setText
                                                                                                 (newString);
                                                                                         slideFromRight(userReplyA);
@@ -1032,6 +1032,7 @@ public class PracticeFragment extends Fragment {
         );
     }
 
+    // exact same logic as user reply A, but writes B instead. (obviously)
     public void getUserReplyB() {
 
         mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)
@@ -1189,6 +1190,7 @@ public class PracticeFragment extends Fragment {
         );
     }
 
+    // same logic as user reply A
     public void getUserReplyC() {
 
         mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)
@@ -1347,6 +1349,7 @@ public class PracticeFragment extends Fragment {
         );
     }
 
+    // same logic as user reply A
     public void getUserReplyD() {
 
         mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)
@@ -1504,12 +1507,16 @@ public class PracticeFragment extends Fragment {
         );
     }
 
+    // builds text and replies for when user returns to the app and their Companion greets them.
+    // mostly for immersion since it would be a little jarring to immediately just resume talking
+    // to your Companion literally right where you left off. This is different than other choices
+    // games, but I like it.
     public void greetingBuilder() {
 
         checkForBackgroundFlag();
 
-        // get random number for random greeting
-        // bound is number of greeting messages in db
+        // get random number for random greeting.
+        // bound is number of greeting messages in db. MUST CHANGE IF MORE ARE ADDED!!
         int buildGreetingNumber = new Random().nextInt(5) + 1;
 
         // convert to string
@@ -1517,6 +1524,7 @@ public class PracticeFragment extends Fragment {
 
         Log.i("greetingBuilder", "Greeting Number: " + greetingNumber);
 
+        // grab Companion greeting text based on the number produced
         mDatabaseRef.child("act1").child("greetingMessage").child(greetingNumber)
                 .child("companionText")
                 .addListenerForSingleValueEvent(
@@ -1552,6 +1560,7 @@ public class PracticeFragment extends Fragment {
                                                                     .replace("username",
                                                                             userName);
 
+                                                            // will uncomment these once lines are recorded
                                                             //getAudioRef();
                                                             //playAudio();
 
@@ -1569,6 +1578,8 @@ public class PracticeFragment extends Fragment {
                                             );
 
 
+                                    // might be able to delete this, I'm not sure if I'll ever write one with their name in it.
+                                    // circle back.
                                 } else if (checkForCompanionNameInText(tempGreeting)) { // is true
 
                                     Log.i("greetingMessage",
@@ -1693,6 +1704,8 @@ public class PracticeFragment extends Fragment {
 
                 }); // end of original value listener
 
+        // might add more replies, but for now this is fine. It's mostly just to take you to your last
+        // scene for now. That may change in the future, but this works until further notice.
         greetingUserReplyA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1727,7 +1740,7 @@ public class PracticeFragment extends Fragment {
         });
     }
 
-    // used for user replies A and C
+    // sliding animation used for user replies A and C
     public void slideFromRight(View view){
         TranslateAnimation animate = new TranslateAnimation(practiceView.getWidth(), 0,0,0);
         animate.setDuration(200);
@@ -1736,7 +1749,7 @@ public class PracticeFragment extends Fragment {
         view.setVisibility(View.VISIBLE);
     }
 
-    // used for user replies B and D
+    // sliding animation used for user replies B and D
     public void slideFromLeft(View view){
         TranslateAnimation animate = new TranslateAnimation(-practiceView.getWidth(),0,0,0);
         animate.setDuration(200);
@@ -1784,6 +1797,7 @@ public class PracticeFragment extends Fragment {
     // TODO: if I have to change the reference chain, may need to strip the length - 1 here in order
     // to get the correct scene number again
 
+    // writes user's scene id in corresponding user node in db
     public void setSceneNumberFromDb(String sceneid) {
         // strip scene and everything after that
         Log.i("setSceneNumberFromDb", "User scene id is: " + sceneid);
@@ -1799,10 +1813,12 @@ public class PracticeFragment extends Fragment {
         Log.i("setSceneNumberFromDb", "Stripped scene number is: " + sceneNumber);
     }
 
+    // start building new scene number
     public String setNewSceneNumber(String oldScene) {
 
         Log.i("setnewSceneNumber", "Old scene: " + oldScene);
 
+        // increments because every scene increases in number, changes come from user reply letters
         sceneIncrement = sceneNumber + 1;
 
         String frontChainHolder;
@@ -1820,6 +1836,7 @@ public class PracticeFragment extends Fragment {
         Log.i("setNewSceneNumber", "Temp scene builder is: " + tempSceneBuilder);
 
         if (isNextAnywayPresent) { // is true
+            // I know this is redundant, but it's to be clear of what's happening.
             String nextAnywayBuilder = tempSceneBuilder.split("_")[0];
 
             tempSceneBuilder = nextAnywayBuilder;
@@ -1827,17 +1844,20 @@ public class PracticeFragment extends Fragment {
             Log.i("setNewSceneNumber", "Next Anyway string split into: " + tempSceneBuilder);
         }
 
+        // sets new scene number to prepare for next one
         sceneNumber += 1;
 
         return tempSceneBuilder;
     }
 
+    // can probably make this void, but I'd rather keep it for now. Not sure how this will evolve
     public String setNewSceneReplyId(String replyId) {
         Log.i("setNewSceneReplyId", "Reply id is: " + replyId);
         sceneReplyId = replyId;
         return sceneReplyId;
     }
 
+    // build next REPLY id to prep for next scene. Void same idea as above
     public String buildNewSceneReplyId(String sceneIdToUse, String oldReplyId) {
 
         String replyIdBuilder = oldReplyId.replace(String.valueOf(sceneIncrement - 1),
@@ -1854,11 +1874,13 @@ public class PracticeFragment extends Fragment {
         return sceneReplyId;
     }
 
+    // simple getter
     public String getNewReplyId() {
         Log.i("getNewReplyId", "Getting new reply id: " + sceneReplyId);
         return sceneReplyId;
     }
 
+    // preps the literal scene to be used as a base. Strips away all other modifiers
     public int readAndReturnSceneNumber(String sceneToUse) {
 
         String strippedScene;
@@ -1890,8 +1912,13 @@ public class PracticeFragment extends Fragment {
     // TODO: if using new reference chain, may have to set which user reply was used in the on click
     // and send it here in order to build the next scene id which the correct chain
 
+    // insanely important method. Creates the scene id that all other builders start from. Very simple
+    // but that's intentional to make it more bulletproof. Takes in user's reply and uses that to create
+    // the next one.
     public String createNewSceneId(String tempScene, String replyId) {
 
+        // check scene for flag that it doesn't matter what the user chooses, we can build the id
+        // independent of a choice
         isNextAnywayPresent = checkForNextAnyway();
 
         Log.d("createNewSceneId", "Temp scene: " + tempScene);
@@ -1909,7 +1936,7 @@ public class PracticeFragment extends Fragment {
 
         } else { // no next anyway, create reference chain normally
 
-            int underscoreCount = 0; // counting occurrences
+            int underscoreCount = 0; // counting occurrences, used to check if scene is nextanyway
 
             for (char c : userSceneId.toCharArray()) {
                 if (c == '_') {
@@ -1972,6 +1999,9 @@ public class PracticeFragment extends Fragment {
         return userSceneId;
     }
 
+    // can probably change this to void, I like that behavior better anyway. Pretty important method,
+    // checks for modifiers in the scene. Prevents checks from running when there's no reason to like
+    // during a series of exposition scenes or something like that.
     public boolean checkForModifierFlag() {
 
         mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)
@@ -2010,7 +2040,9 @@ public class PracticeFragment extends Fragment {
         return isModifierFlagPresent;
     }
 
-    // check for next anyway flag in scene in database
+    // check for next anyway flag in scene in database. Used for exposition or if I need to reset
+    // any scene reference chains. Sends the user to the next scene regardless of what reply they
+    // choose. Good stuff!
     public boolean checkForNextAnyway() {
 
         mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)
@@ -2098,6 +2130,10 @@ public class PracticeFragment extends Fragment {
     }
 
     // :*
+    // this going to be used more extensively later when I have enough content written to be able
+    // to have separate story branches based on how in love the user is with their Companion.
+    // I think I might veer away from completely platonic and always have some sort of tension b/t
+    // the user and Companion, even if it is mostly one way. Just easier to write.
     public void checkForRelationshipRating(String whichUserReply) {
 
         mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)
@@ -2153,6 +2189,7 @@ public class PracticeFragment extends Fragment {
         );
     }
 
+    // simpley reads and stores Companion name if it's mentioned
     public boolean checkForCompanionNameInText(String dataSnapToUse) {
 
         boolean isCompanionNameInText;
@@ -2183,6 +2220,7 @@ public class PracticeFragment extends Fragment {
         return isCompanionNameInText;
     }
 
+    // checks and stores time greeting feature. Mostly used for immersion, it's a nice touch.
     public boolean checkForTimeGreeting(String datasnapToUse) {
 
         // morning 5-11, afternoon 11-5, evening 5-9, nighttime 9pm-2am, late night/early morning 2-5am.
@@ -2223,6 +2261,7 @@ public class PracticeFragment extends Fragment {
                 timeGreeting = "Buenas noches";
                 Log.i("checkForTime", timeGreeting);
 
+                // not sure why this has a warning, it works fine
             } else if (currentHour > 2 && currentHour <= 5) { // early morning
                 timeGreeting = "Good morning";
                 Log.i("checkForTime", timeGreeting);
@@ -2272,6 +2311,8 @@ public class PracticeFragment extends Fragment {
         return isTimeGrettingPresent;
     }
 
+    // prompt to tell user in user replies to press to continue; used during a long exposition series
+    // or similar. Not sure if I like this at all yet. Leaning towards no.
     public void checkForContinuePrompt() {
 
         mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)
@@ -2294,6 +2335,8 @@ public class PracticeFragment extends Fragment {
         );
     }
 
+    // checks for timed event and creates it if needed. This will be needed a lot in the future, I
+    // really like it. Seems to work fine for now which is honestly insanely surprising
     public void checkForTimedEvent() {
 
         mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)
@@ -2306,15 +2349,19 @@ public class PracticeFragment extends Fragment {
 
                             isTimedEventPresent = true;
 
+                            // gets time length from db. Time is determined in each individual scene
                             progressMaxInLong = (long) dataSnapshot.getValue();
 
+                            // comes as a long from db. Casts to int so it can be used later
                             progressMaxInSeconds = (int) progressMaxInLong;
 
                             Log.i("checkTimedEvent", "Event time: " + progressMaxInSeconds);
 
+                            // display hint so user knows what's happening
                             timedEventText.setVisibility(View.VISIBLE);
                             timedEventText.startAnimation(fadeRepeat);
 
+                            // set and show bar
                             numberProgressBar.setVisibility(View.VISIBLE);
                             numberProgressBar.setMax(progressMaxInSeconds * 10);
                             numberProgressBar.setProgress(progressMaxInSeconds * 10);
@@ -2322,15 +2369,20 @@ public class PracticeFragment extends Fragment {
                             countDownTimer = new CountDownTimer(
                                     (progressMaxInSeconds * 1000), 100) {
 
+                                // animate progress to smooth it out, and if user doesn't choose a
+                                // reply in time have it automatically choose reply A
                                 @Override
                                 public void onTick(long millisUntilFinished) {
 
-                                    milliProgress = (int) Math.round(millisUntilFinished / 100);
+                                    milliProgress = Math.round(millisUntilFinished / 100);
 
                                     Log.i("progressAmount", "Milli progress: " + milliProgress);
 
                                     setProgressAnimate(numberProgressBar, milliProgress);
 
+                                    // user ran out of time and didn't choose a reply. Goes to next
+                                    // scene and choose reply A by default. Always make reply A the
+                                    // one you want to be default in the scene.
                                     if (milliProgress == 3 || milliProgress == 2) {
                                         setNewSceneReplyId(getReplyAChildBuilder());
                                         createNewSceneId(tempSceneBuilder, getReplyAChildBuilder());
@@ -2344,6 +2396,7 @@ public class PracticeFragment extends Fragment {
                                         getUserReplyD();
 
                                     } else if (milliProgress == 1) {
+                                        // clears everything once progress is done
                                         numberProgressBar.clearAnimation();
                                         numberProgressBar.setVisibility(View.GONE);
 
@@ -2390,6 +2443,8 @@ public class PracticeFragment extends Fragment {
         );
     }
 
+    // checks for key scene in order to save user's place in case of crashes or to return to the main
+    // story from a side story. Pretty simple but important. Sets it in user's db node.
     public void checkForKeySceneFlag() {
 
         mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)
@@ -2424,6 +2479,9 @@ public class PracticeFragment extends Fragment {
         );
     }
 
+    // logic to build audio reference if the Companion text includes any names. Will probably have
+    // to add time greetings to this, but I might put those in their own thing since they're
+    // relatively static and only referenced once each time the user opens the app. We'll see
     private void getCustomAudioRef() {
 
         if (companionText.getText().toString().contains(userName)) {
@@ -2515,6 +2573,8 @@ public class PracticeFragment extends Fragment {
         }
     }
 
+    // builds audio reference based on corresponding scene. Companion text has no modifiers, so a
+    // custom reference isn't needed and it can just play straight up.
     private void getAudioRef() {
 
         Log.i("getAudioRef", "User has no text modifiers, play normal audio");
@@ -2560,6 +2620,7 @@ public class PracticeFragment extends Fragment {
         );
     }
 
+    // gets audio from storage location in fb using the reference built earlier
     private void fetchAudioUrlFromFirebase(String audioRefFromDb) {
 
         Log.i("fetchAudio", "Audio ref from db is: " + audioRefFromDb);
@@ -2573,8 +2634,9 @@ public class PracticeFragment extends Fragment {
                     // Download url of file
                     String url = uri.toString();
 
+                    // give the file to the media player
                     mediaPlayer.setDataSource(url);
-                    // wait for media player to get prepare
+                    // wait for media player to prepare
                     mediaPlayer.prepareAsync();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -2591,6 +2653,7 @@ public class PracticeFragment extends Fragment {
 
     }
 
+    // }(____*)
     private void playAudio() {
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -2601,13 +2664,14 @@ public class PracticeFragment extends Fragment {
                 mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mediaPlayer) {
-                        mediaPlayer.reset(); // clear audio to prepare for next one
+                        mediaPlayer.reset(); // clear audio to prepare for next one. VERY important
                     }
                 });
             }
         });
     }
 
+    // checks scene node for video reference
     public void checkForVideoFlag() {
 
         mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)
@@ -2626,11 +2690,12 @@ public class PracticeFragment extends Fragment {
 
                             Log.i("getCustomAudioRef", "User's username audio ref: " + videoRef);
 
+                            // builds url reference based on user id and the reference gotten from the scene
                             StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-                            StorageReference audioDownloadUrl = storageReference
+                            StorageReference videoDownloadUrl = storageReference
                                     .child("/" + userId + "/" + videoRef + ".mp4");
 
-                            audioDownloadUrl.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+                            videoDownloadUrl.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
                             {
                                 @Override
                                 public void onSuccess(Uri downloadUrl)
@@ -2641,7 +2706,7 @@ public class PracticeFragment extends Fragment {
                                 }
                             });
 
-                            audioDownloadUrl.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
+                            videoDownloadUrl.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     Log.i("checkVideoRef", "Download username url failed");
@@ -2657,6 +2722,7 @@ public class PracticeFragment extends Fragment {
         );
     }
 
+    // downloads video file from storage using reference built earlier
     private void fetchVideoUrlFromFirebase(String videoRefFromDb) {
 
         Log.i("fetchVideo", "Video ref from db is: " + videoRefFromDb);
@@ -2669,6 +2735,7 @@ public class PracticeFragment extends Fragment {
                 // Download url of file
                 String uriString = uri.toString();
 
+                // parse it to be loaded
                 Uri uriParsed = Uri.parse(uriString);
 
                 Log.i("fetchVideo", "Uri string is: " + uriString);
@@ -2676,16 +2743,17 @@ public class PracticeFragment extends Fragment {
                 playVideoView(uriParsed);
             }
         })
-
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.i("TAG", e.getMessage());
                     }
                 });
-
     }
 
+    // this functionally works now, but I'm going to change it to the scalable video view since I
+    // can't get this native one to crop properly. I'm pretty sure most of this can be re-used so
+    // we'll keep it for now.
     private void playVideoView(Uri uri) {
 
         Log.i("videoView", "Video view is doing something");
@@ -2731,6 +2799,7 @@ public class PracticeFragment extends Fragment {
         });
     }
 
+    // animation to smooth out any progress bars being used
     private void setProgressAnimate(NumberProgressBar pb, int progressTo) {
 
         ObjectAnimator animation = ObjectAnimator.ofInt(pb, "progress", pb.getProgress(), progressTo);

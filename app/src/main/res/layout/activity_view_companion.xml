@@ -23,6 +23,14 @@
         android:textStyle="bold|italic"
         android:textColor="@color/colorMenuGrey"/>
 
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/arrow_left"/>
+
     <ProgressBar
         android:id="@+id/videoview_bar"
         android:layout_marginLeft="50dp"
