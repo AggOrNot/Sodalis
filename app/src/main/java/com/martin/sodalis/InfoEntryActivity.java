@@ -41,6 +41,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * activity where creates their account with their email and password. Also enters their birthday to
+ * 'verify' that they're over 18. I have no idea why that dialog fragment was so difficult to get right.
+ * I feel like I should just try and write a totally custom one so it'll actually look good. Also this
+ * activity writes the user into the db once their account is created. Builds all the nodes needed
+ * to complete the setup.
+ */
+
 public class InfoEntryActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText userEmailField;
@@ -78,13 +86,14 @@ public class InfoEntryActivity extends AppCompatActivity implements View.OnClick
 
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        // initialize fields and UI elements
         userEmailField = findViewById(R.id.info_email);
         userPasswordField = findViewById(R.id.info_password);
 
         noBday = findViewById(R.id.wheres_mybday);
         displayDate = findViewById(R.id.bday_shown);
 
-        showPassword = (CheckBox) findViewById(R.id.show_password_box);
+        showPassword = findViewById(R.id.show_password_box);
 
         // initialize firebase auth and database instances to be used later
         mAuth = FirebaseAuth.getInstance();
@@ -110,7 +119,7 @@ public class InfoEntryActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
-        Button doneButton = (Button) findViewById(R.id.info_done_button);
+        Button doneButton = findViewById(R.id.info_done_button);
 
         doneButton.setOnClickListener(new View.OnClickListener() {
 
@@ -229,7 +238,8 @@ public class InfoEntryActivity extends AppCompatActivity implements View.OnClick
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(InfoEntryActivity.this, "Authentication failed.",
+                            Toast.makeText(InfoEntryActivity.this,
+                                    "Authentication failed. Email is already in use or another error occurred.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -299,7 +309,7 @@ public class InfoEntryActivity extends AppCompatActivity implements View.OnClick
         mDatabaseRef.child(userId).child("setupLastCompleted").setValue("scene3");
     }
 
-    // check to see if any forms were left empty
+    // check to see if any forms were left empty, stop sign in if they are
     private boolean validateForm() {
         boolean valid = true;
 
