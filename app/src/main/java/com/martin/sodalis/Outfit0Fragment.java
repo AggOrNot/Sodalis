@@ -32,6 +32,15 @@ public class Outfit0Fragment extends Fragment {
 
     private static final String TAG = "Outfit0";
 
+    /**
+     * pretty much identical to the appearance fragments, but shows outfit choices based on which
+     * appearance was chosen. Next step is to read which appearance the user has and to shoot back
+     * the correct outfit choices. Video situation is the same as the appearance fragments. Outfit
+     * fragments don't have videos playing right now because there's no need. Same logic as
+     * appearances so it's fine just to see if they work properly with all the UI and stuff.
+     *
+     */
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 

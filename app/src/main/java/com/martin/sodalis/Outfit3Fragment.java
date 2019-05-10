@@ -27,6 +27,12 @@ public class Outfit3Fragment extends Fragment {
 
     private static final String TAG = "Outfit3Fragment";
 
+    /**
+     * exact same logic as first outfit, but isn't a premium outfit and the user can choose
+     * this one for free. Otherwise indistinguishable
+     *
+     */
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
