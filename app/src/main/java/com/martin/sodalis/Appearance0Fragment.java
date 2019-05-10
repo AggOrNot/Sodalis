@@ -37,6 +37,17 @@ public class Appearance0Fragment extends Fragment {
 
     private static final String TAG = "Appearance0";
 
+    /**
+     * shows one of the video views for choosing a Companion appearance. First one will be premium
+     * for now. Is hardcoded to play a local video for now because I burn through my firebase
+     * allotment if I load the videos everytime I start the activity. Commented methods work though
+     * getting the video from the fb storage. Next step is to store the user's selection and have it
+     * correspond with the correct storage place. And come up with a system that keeps the user's
+     * selections organized so they can be easily accessed later. Contains UI to view and buy more
+     * 'coins' also. Need to come up with a better name than coins obviously.
+     *
+     */
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -64,6 +75,7 @@ public class Appearance0Fragment extends Fragment {
             e.printStackTrace();
         }*/
 
+        // confirm user's selection before moving on to next activity
         chooseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,6 +170,6 @@ public class Appearance0Fragment extends Fragment {
         });
     } */ // end of videoview
 
-    // TODO: if user's coins are less than the apperance costs, launch the purchase coins activity
+    // TODO: if user's coins are less than the appearance costs, launch the purchase coins activity
     // only needs to be done in the fragments that have premium appearances
 }

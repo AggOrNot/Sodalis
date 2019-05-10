@@ -30,6 +30,12 @@ public class Appearance1Fragment extends Fragment {
 
     private static final String TAG = "Appearance1";
 
+    /**
+     * exact same logic as first appearance, but isn't a premium appearance and the user can choose
+     * this one for free. Otherwise indistinguishable
+     *
+     */
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
