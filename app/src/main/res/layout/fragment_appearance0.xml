@@ -41,15 +41,31 @@
         android:layout_alignParentRight="true"
         android:src="@drawable/arrow_right" />
 
+    <Button
+        android:id="@+id/masculine_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:text="@string/masculine_button"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold|italic"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"
+        style="?android:attr/borderlessButtonStyle"/>
+
     <com.romainpiel.shimmer.ShimmerButton
         android:id="@+id/premium_button0"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
-        android:paddingLeft="40dp"
-        android:paddingRight="10dp"
+        android:layout_above="@id/masculine_button"
+        android:layout_marginBottom="20dp"
+        android:layout_alignLeft="@id/masculine_button"
+        android:layout_alignRight="@id/masculine_button"
         android:text="@string/choose_premium_button"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold|italic"

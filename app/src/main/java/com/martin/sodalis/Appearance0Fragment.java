@@ -44,7 +44,8 @@ public class Appearance0Fragment extends Fragment {
      * getting the video from the fb storage. Next step is to store the user's selection and have it
      * correspond with the correct storage place. And come up with a system that keeps the user's
      * selections organized so they can be easily accessed later. Contains UI to view and buy more
-     * 'coins' also. Need to come up with a better name than coins obviously.
+     * 'coins' also. Need to come up with a better name than coins obviously. Masculine button
+     * functionality will be added next also actually.
      *
      */
 
