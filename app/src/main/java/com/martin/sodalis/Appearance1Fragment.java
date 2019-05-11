@@ -14,6 +14,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.yqritc.scalablevideoview.ScalableVideoView;
 
 import java.io.IOException;
@@ -27,6 +30,10 @@ public class Appearance1Fragment extends Fragment {
     private ScalableVideoView scalableVideoView;
 
     private ProgressBar videoProgressBar;
+
+    private DatabaseReference databaseReference;
+
+    private String userId;
 
     private static final String TAG = "Appearance1";
 
@@ -50,6 +57,10 @@ public class Appearance1Fragment extends Fragment {
 
         videoProgressBar.setVisibility(View.VISIBLE);
 
+        userId = getUid();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
         playVideoLocal();
 
         /*try {
@@ -71,7 +82,12 @@ public class Appearance1Fragment extends Fragment {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Log.d(TAG, "onClick: yes");
 
-                                Log.i(TAG, "User signed out");
+                                Log.i(TAG, "Setting user's appearance base: " + "appearance1");
+
+                                // set selection in user's db node to be read later
+                                databaseReference.child("users").child(userId).child("appearanceBase")
+                                        .setValue("appearance1");
+
                                 Intent iNext = new Intent(getActivity(), ChooseOutfitActivity.class);
                                 startActivity(iNext);
 
@@ -91,6 +107,10 @@ public class Appearance1Fragment extends Fragment {
 
         return appearance1View;
     } // end of oncreate
+
+    public String getUid() {
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
 
     private void playVideoView() throws IOException {
 

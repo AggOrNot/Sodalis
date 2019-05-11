@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -13,6 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerButton;
 import com.yqritc.scalablevideoview.ScalableVideoView;
@@ -29,6 +36,11 @@ public class Outfit0Fragment extends Fragment {
     private ScalableVideoView scalableVideoView;
 
     private ProgressBar videoProgressBar;
+
+    private DatabaseReference databaseReference;
+
+    private String userId;
+    private String appearanceBase;
 
     private static final String TAG = "Outfit0";
 
@@ -58,6 +70,28 @@ public class Outfit0Fragment extends Fragment {
         shimmer.setDuration(1500);
         shimmer.start(chooseButton);
 
+        userId = getUid();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        // get user's base appearance from their node in order to build final appearance later
+        databaseReference.child("users").child(userId).child("appearanceBase")
+                .addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                if (dataSnapshot.exists()) {
+                                    appearanceBase = dataSnapshot.getValue().toString();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
+                        }
+                );
+
         //playVideoLocal();
 
         /*try {
@@ -82,6 +116,12 @@ public class Outfit0Fragment extends Fragment {
                                 //scalableVideoView.release();
                                 //videoViewTester.stopPlayback();
 
+                                Log.i(TAG, "Final appearance: " + appearanceBase + "outfit0");
+
+                                // finalize user's appearance/outfit combo in their node
+                                databaseReference.child("users").child(userId).child("appearanceFinal")
+                                        .setValue(appearanceBase + "outfit0");
+
                                 Intent iNext = new Intent(getActivity(), ViewCompanionActivity.class);
                                 startActivity(iNext);
 
@@ -101,6 +141,10 @@ public class Outfit0Fragment extends Fragment {
 
         return outfit0View;
     } // end of oncreate
+
+    public String getUid() {
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
 
     private void playVideoLocal() {
 

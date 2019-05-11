@@ -32,10 +32,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Random;
 
-/**
- * Created by Martin on 3/13/18.
- */
-
 public class BootUp extends AppCompatActivity {
 
     private NumberProgressBar progressbar;

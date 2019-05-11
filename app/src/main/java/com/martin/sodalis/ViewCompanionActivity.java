@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -38,6 +39,7 @@ public class ViewCompanionActivity extends AppCompatActivity {
 
     private String userId;
     private String companionNameMain;
+    private String appearanceFinal;
 
     private Uri uriParsed;
 
@@ -111,6 +113,30 @@ public class ViewCompanionActivity extends AppCompatActivity {
                                 }
                             }
                     );
+
+            // read user's Companion Appearance to be used to load video from correct storage location
+            mDatabaseRef.child("users").child(userId).child("appearanceFinal")
+                    .addListenerForSingleValueEvent(
+                            new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                    if (dataSnapshot.exists()) {
+
+                                        appearanceFinal = dataSnapshot.getValue().toString();
+
+                                        Log.i(TAG, "Appearance final is: " + appearanceFinal);
+
+                                        // might eventually play video view here
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                }
+                            }
+                    );
+
         } else {
             // show sodalis I guess? I can probably come up with something better at some point
             nameTextview.setVisibility(View.VISIBLE);

@@ -17,6 +17,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerButton;
 import com.yqritc.scalablevideoview.ScalableVideoView;
@@ -34,6 +37,10 @@ public class Appearance0Fragment extends Fragment {
     private ScalableVideoView scalableVideoView;
 
     private ProgressBar videoProgressBar;
+
+    private String userId;
+
+    private DatabaseReference databaseReference;
 
     private static final String TAG = "Appearance0";
 
@@ -68,6 +75,10 @@ public class Appearance0Fragment extends Fragment {
 
         videoProgressBar.setVisibility(View.VISIBLE);
 
+        userId = getUid();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
         playVideoLocal();
 
         /*try {
@@ -93,6 +104,12 @@ public class Appearance0Fragment extends Fragment {
                                 scalableVideoView.release();
                                 //videoViewTester.stopPlayback();
 
+                                Log.i(TAG, "Setting user's appearance base: " + "appearance0");
+
+                                // set selection in user's db node to be read later
+                                databaseReference.child("users").child(userId).child("appearanceBase")
+                                        .setValue("appearance0");
+
                                 Intent iNext = new Intent(getActivity(), ChooseOutfitActivity.class);
                                 startActivity(iNext);
 
@@ -112,6 +129,10 @@ public class Appearance0Fragment extends Fragment {
 
         return appearance0View;
     } // end of oncreate
+
+    public String getUid() {
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
 
     private void playVideoLocal() {
 
