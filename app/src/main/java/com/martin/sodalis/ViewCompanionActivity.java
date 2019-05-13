@@ -159,11 +159,11 @@ public class ViewCompanionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // this will eventually be replaced with intent to appearance changes. Need to come
-                // up with an alternative to a 'closet'. But same idea.
                 scalableVideoView.stop();
                 scalableVideoView.release();
-                finish();
+
+                Intent iChange = new Intent(getApplicationContext(), Appearance0Fragment.class);
+                startActivity(iChange);
             }
         });
 

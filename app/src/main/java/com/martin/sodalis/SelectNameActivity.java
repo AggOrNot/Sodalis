@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-/** activity that selects user's name from list of default names
+/** activity that selects user's name from array of default names
  *
  */
 

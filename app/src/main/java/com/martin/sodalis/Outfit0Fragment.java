@@ -60,7 +60,6 @@ public class Outfit0Fragment extends Fragment {
 
         videoProgressBar = outfit0View.findViewById(R.id.videoview_bar);
 
-        //videoViewTester = appearance0View.findViewById(R.id.video_view_tester);
         scalableVideoView = outfit0View.findViewById(R.id.video_view_tester);
         scalableVideoView.setVisibility(View.GONE);
 
@@ -114,7 +113,6 @@ public class Outfit0Fragment extends Fragment {
                                 shimmer.cancel();
                                 //scalableVideoView.stop();
                                 //scalableVideoView.release();
-                                //videoViewTester.stopPlayback();
 
                                 Log.i(TAG, "Final appearance: " + appearanceBase + "outfit0");
 

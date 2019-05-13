@@ -33,7 +33,6 @@ public class Appearance0Fragment extends Fragment {
 
     private Uri uriParsed;
 
-    //private VideoView videoViewTester;
     private ScalableVideoView scalableVideoView;
 
     private ProgressBar videoProgressBar;
@@ -63,7 +62,6 @@ public class Appearance0Fragment extends Fragment {
 
         videoProgressBar = appearance0View.findViewById(R.id.videoview_bar);
 
-        //videoViewTester = appearance0View.findViewById(R.id.video_view_tester);
         scalableVideoView = appearance0View.findViewById(R.id.video_view_tester);
         scalableVideoView.setVisibility(View.GONE);
 
@@ -102,9 +100,8 @@ public class Appearance0Fragment extends Fragment {
                                 shimmer.cancel();
                                 scalableVideoView.stop();
                                 scalableVideoView.release();
-                                //videoViewTester.stopPlayback();
 
-                                Log.i(TAG, "Setting user's appearance base: " + "appearance0");
+                                Log.i(TAG, "Setting user's appearance base: appearance0");
 
                                 // set selection in user's db node to be read later
                                 databaseReference.child("users").child(userId).child("appearanceBase")

@@ -82,7 +82,7 @@ public class Appearance3Fragment extends Fragment {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Log.d(TAG, "onClick: yes");
 
-                                Log.i(TAG, "Setting user's appearance base: " + "appearance3");
+                                Log.i(TAG, "Setting user's appearance base: appearance3");
 
                                 // set selection in user's db node to be read later
                                 databaseReference.child("users").child(userId).child("appearanceBase")
