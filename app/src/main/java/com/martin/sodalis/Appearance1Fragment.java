@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -14,9 +15,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.yqritc.scalablevideoview.ScalableVideoView;
 
 import java.io.IOException;
@@ -32,6 +37,7 @@ public class Appearance1Fragment extends Fragment {
     private ProgressBar videoProgressBar;
 
     private DatabaseReference databaseReference;
+    private FirebaseStorage firebaseStorage;
 
     private String userId;
 
@@ -60,14 +66,11 @@ public class Appearance1Fragment extends Fragment {
         userId = getUid();
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        firebaseStorage = FirebaseStorage.getInstance();
 
         playVideoLocal();
 
-        /*try {
-            playVideoView();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+        //getAppearanceRefToDisplay();
 
         chooseButton = appearance1View.findViewById(R.id.appearance_button1);
 
@@ -112,11 +115,12 @@ public class Appearance1Fragment extends Fragment {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
-    private void playVideoView() throws IOException {
+    private void playVideoView(Uri uri) throws IOException {
 
         Log.i("videoView1", "Video view is doing something");
 
-        uriParsed = Uri.parse("https://firebasestorage.googleapis.com/v0/b/sodalis-53c9d.appspot.com/o/boat.mp4?alt=media&token=16f80c30-8393-4aaf-9891-ea26dd71cd80");
+        uriParsed = uri;
+
         scalableVideoView.setDataSource(getActivity(), uriParsed);
 
         scalableVideoView.prepareAsync(new MediaPlayer.OnPreparedListener() {
@@ -132,10 +136,6 @@ public class Appearance1Fragment extends Fragment {
                 scalableVideoView.setLooping(true);
 
                 scalableVideoView.start();
-
-                if (scalableVideoView.isPlaying()) {
-                    videoProgressBar.setVisibility(View.GONE);
-                }
             }
         });
     }
@@ -168,5 +168,39 @@ public class Appearance1Fragment extends Fragment {
         } catch (IOException ioe) {
             //handle error
         }
+    }
+
+    private void getAppearanceRefToDisplay() {
+
+        Log.i("appearanceBaseRef1", "User's video ref: " + "appearance1");
+
+        // builds url reference based on appearance/outfit combo
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+        StorageReference videoDownloadUrl = storageReference
+                .child("/" + "appearanceBases" + "/" + "appearance1" + ".mp4");
+
+        Log.i("appearanceBaseRef1", "Storage reference is: " + videoDownloadUrl.toString());
+
+        videoDownloadUrl.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+        {
+            @Override
+            public void onSuccess(Uri downloadUrl)
+            {
+                Log.i("appearanceBaseRef1", "Download url is: " + downloadUrl);
+
+                try {
+                    playVideoView(downloadUrl);
+                } catch (IOException e) {
+                    Log.i("appearanceBaseRef1", "Play video view failed");
+                }
+            }
+        });
+
+        videoDownloadUrl.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i("appearanceBaseRef1", "Download url failed");
+            }
+        });
     }
 }

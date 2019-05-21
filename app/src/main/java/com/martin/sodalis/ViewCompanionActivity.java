@@ -1,14 +1,14 @@
 package com.martin.sodalis;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,15 +19,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.yqritc.scalablevideoview.ScalableVideoView;
 
-import java.io.IOException;
 
 public class ViewCompanionActivity extends AppCompatActivity {
 
@@ -36,6 +36,7 @@ public class ViewCompanionActivity extends AppCompatActivity {
     private TextView nameTextview;
 
     private ImageView backButton;
+    private ImageView toggleViews;
 
     private String userId;
     private String companionNameMain;
@@ -49,6 +50,11 @@ public class ViewCompanionActivity extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabaseRef;
+    private FirebaseStorage firebaseStorage;
+
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+
+    private ViewPager mViewPager;
 
     private static final String TAG = "ViewCompanionActivity";
 
@@ -76,14 +82,7 @@ public class ViewCompanionActivity extends AppCompatActivity {
         // initialize firebase instances
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference();
-
-        // initialize progress bar and make visible until video is loaded (infinite bar)
-        videoProgressBar = findViewById(R.id.videoview_bar);
-        videoProgressBar.setVisibility(View.VISIBLE);
-
-        // initialize video view and make INvisible until video is loaded and ready to play
-        scalableVideoView = findViewById(R.id.video_view);
-        scalableVideoView.setVisibility(View.GONE);
+        firebaseStorage = FirebaseStorage.getInstance();
 
         // initialize and read user's Companion name from db and display. Hide until loaded
         nameTextview = findViewById(R.id.companion_name);
@@ -114,43 +113,10 @@ public class ViewCompanionActivity extends AppCompatActivity {
                             }
                     );
 
-            // read user's Companion Appearance to be used to load video from correct storage location
-            mDatabaseRef.child("users").child(userId).child("appearanceFinal")
-                    .addListenerForSingleValueEvent(
-                            new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                    if (dataSnapshot.exists()) {
-
-                                        appearanceFinal = dataSnapshot.getValue().toString();
-
-                                        Log.i(TAG, "Appearance final is: " + appearanceFinal);
-
-                                        // might eventually play video view here
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                }
-                            }
-                    );
-
         } else {
             // show sodalis I guess? I can probably come up with something better at some point
             nameTextview.setVisibility(View.VISIBLE);
         }
-
-        // play video
-        playVideoLocal();
-
-        // actual video view to be used later
-        /*try {
-            playVideoView();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
 
         // initialize and set listener for changing user's Companion appearance
         changeAppearanceButton = findViewById(R.id.change_appearance_button);
@@ -159,10 +125,7 @@ public class ViewCompanionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                scalableVideoView.stop();
-                scalableVideoView.release();
-
-                Intent iChange = new Intent(getApplicationContext(), Appearance0Fragment.class);
+                Intent iChange = new Intent(getApplicationContext(), PurchaseAppearancesActivity.class);
                 startActivity(iChange);
             }
         });
@@ -172,79 +135,71 @@ public class ViewCompanionActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                scalableVideoView.stop();
-                scalableVideoView.release();
                 finish();
             }
         });
 
-    } // end of oncreate
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-    // temporary method for playing local video file so I don't burn through all my firebase data
-    private void playVideoLocal() {
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setOffscreenPageLimit(1); // KEEPS VIDEOS SMOOTH
 
-        try {
-            scalableVideoView.setRawData(R.raw.boat);
-
-            scalableVideoView.prepareAsync(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mp) {
-                    Log.i("viewCompanion", "Video view is prepared");
-                    //Log.i("videoView3", "Uri used is: " + uriParsed.toString());
-
-                    scalableVideoView.setVisibility(View.VISIBLE);
-                    videoProgressBar.setVisibility(View.GONE);
-
-                    scalableVideoView.setVolume(0,0);
-                    scalableVideoView.setLooping(true);
-
-                    scalableVideoView.start();
-
-                    if (scalableVideoView.isPlaying()) {
-                        videoProgressBar.setVisibility(View.GONE);
-                    }
-                }
-            });
-
-        } catch (IOException ioe) {
-            //handle error
-        }
-    }
-
-    // TODO: read video and storage location from user's node and parse to prepare for video player
-
-    // actual method for playing the video
-    private void playVideoView() throws IOException {
-
-        Log.i(TAG, "Video view is doing something");
-
-        uriParsed = Uri.parse("https://firebasestorage.googleapis.com/v0/b/sodalis-53c9d.appspot.com/o/venice.mp4?alt=media&token=152d3535-e0f5-48ca-8737-2fb2c863858b");
-
-        scalableVideoView.setDataSource(getApplicationContext(), uriParsed);
-
-        scalableVideoView.prepareAsync(new MediaPlayer.OnPreparedListener() {
+        // toggle view Companion button
+        toggleViews = findViewById(R.id.toggle_views);
+        toggleViews.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPrepared(MediaPlayer mp) {
-                Log.i(TAG, "Video view is prepared");
-                Log.i(TAG, "Uri used is: " + uriParsed.toString());
+            public void onClick(View v) {
+                // check to see what the current position of the viewpager is
+                int fragmentPosition = mViewPager.getCurrentItem();
+                Log.i(TAG, "Current fragment item is: " + fragmentPosition);
 
-                scalableVideoView.setVisibility(View.VISIBLE);
-                videoProgressBar.setVisibility(View.GONE);
-
-                scalableVideoView.start();
-                scalableVideoView.setVolume(0,0);
-                scalableVideoView.setLooping(true);
-
-                // make sure progress bar is hidden once video starts. Redundancy just in case idk!
-                if (scalableVideoView.isPlaying()) {
-                    videoProgressBar.setVisibility(View.GONE);
+                // switch to the other position depending on what it's at
+                switch (fragmentPosition) {
+                    case 0:
+                        mViewPager.setCurrentItem(1);
+                        // log to double check. Works well!
+                        Log.i(TAG, "Setting new current frag as: " + mViewPager.getCurrentItem());
+                        break;
+                    case 1:
+                        mViewPager.setCurrentItem(0);
+                        Log.i(TAG, "Setting new current frag as: " + mViewPager.getCurrentItem());
+                        break;
                 }
             }
         });
-    } // end of videoview
+    } // end of oncreate
 
     // get userid from db
     public String getUid() {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
+
+    // adapter to hold the two fragments
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+            switch (position) {
+                case 0:
+                    return new ViewCompanionCloseFragment();
+                case 1:
+                    return new ViewCompanionFarFragment();
+                default:
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+
+            return 2;
+        }
     }
 }

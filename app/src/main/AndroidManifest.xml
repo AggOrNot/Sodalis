@@ -13,21 +13,18 @@
         tools:replace="android:theme">
         <activity
             android:name=".PurchaseAppearancesActivity"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".FirstBootActivity"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".InfoEntryActivity"
@@ -56,9 +53,9 @@
         <activity
             android:name=".ViewCompanionActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".PurchaseCoinsActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+        <activity
+            android:name=".PurchaseCoinsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

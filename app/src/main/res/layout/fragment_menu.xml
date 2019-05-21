@@ -65,31 +65,31 @@
         android:text="@string/settings_rateus"/>
 
     <TextView
-        android:id="@+id/settings_view_appearance"
+        android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/settings_rateus"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:text="@string/settings_view_appearance"/>
+        android:text="@string/logout" />
 
     <TextView
-        android:id="@+id/logout"
+        android:id="@+id/settings_view_appearance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/settings_view_appearance"
+        android:layout_below="@id/logout"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:text="@string/logout" />
+        android:text="@string/settings_view_appearance"/>
 
     <TextView
         android:id="@+id/settings_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/logout"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="140dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:text="@string/settings_version"/>

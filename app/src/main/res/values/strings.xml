@@ -723,7 +723,7 @@
     <string name="appearance_done_button">All done!</string>
     <string name="appearance_notdone_button">Not quite right…</string>
     <string name="appearance_confirm">Is this your correct selection?</string>
-    <string name="change_appearance">Change Appearance</string>
+    <string name="change_appearance">Change Outfit</string>
     <string name="masculine_button">Masculine Appearances</string>
     <string name="feminine_appearances">Feminine Appearances</string>
 
@@ -736,5 +736,11 @@
     Click on the button below to go back to the last important scene.</string>
     <string name="title_activity_purchase">Purchase</string>
     <string name="title_activity_purchase_appearances">PurchaseAppearancesActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

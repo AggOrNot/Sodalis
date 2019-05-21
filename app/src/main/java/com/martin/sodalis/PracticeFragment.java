@@ -2688,7 +2688,7 @@ public class PracticeFragment extends Fragment {
 
                             videoRef = "videoTester";
 
-                            Log.i("getCustomAudioRef", "User's username audio ref: " + videoRef);
+                            Log.i("getVideoRef", "User's video ref: " + videoRef);
 
                             // builds url reference based on user id and the reference gotten from the scene
                             StorageReference storageReference = FirebaseStorage.getInstance().getReference();
@@ -2709,7 +2709,7 @@ public class PracticeFragment extends Fragment {
                             videoDownloadUrl.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Log.i("checkVideoRef", "Download username url failed");
+                                    Log.i("checkVideoRef", "Download url failed");
                                 }
                             });
                         }

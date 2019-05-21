@@ -14,12 +14,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerButton;
 import com.yqritc.scalablevideoview.ScalableVideoView;
@@ -38,9 +43,11 @@ public class Outfit0Fragment extends Fragment {
     private ProgressBar videoProgressBar;
 
     private DatabaseReference databaseReference;
+    private FirebaseStorage firebaseStorage;
 
     private String userId;
     private String appearanceBase;
+    private String appearanceOutfitCombo;;
 
     private static final String TAG = "Outfit0";
 
@@ -58,6 +65,7 @@ public class Outfit0Fragment extends Fragment {
 
         View outfit0View = inflater.inflate(R.layout.fragment_outfit0, container, false);
 
+        // initialize views and buttons
         videoProgressBar = outfit0View.findViewById(R.id.videoview_bar);
 
         scalableVideoView = outfit0View.findViewById(R.id.video_view_tester);
@@ -69,9 +77,12 @@ public class Outfit0Fragment extends Fragment {
         shimmer.setDuration(1500);
         shimmer.start(chooseButton);
 
+        videoProgressBar.setVisibility(View.VISIBLE);
+
         userId = getUid();
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        firebaseStorage = FirebaseStorage.getInstance();
 
         // get user's base appearance from their node in order to build final appearance later
         databaseReference.child("users").child(userId).child("appearanceBase")
@@ -82,6 +93,8 @@ public class Outfit0Fragment extends Fragment {
 
                                 if (dataSnapshot.exists()) {
                                     appearanceBase = dataSnapshot.getValue().toString();
+
+                                    appearanceOutfitCombo = getOutfitComboToDisplay(appearanceBase);
                                 }
                             }
 
@@ -92,12 +105,6 @@ public class Outfit0Fragment extends Fragment {
                 );
 
         //playVideoLocal();
-
-        /*try {
-            playVideoView();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
 
         chooseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,14 +118,14 @@ public class Outfit0Fragment extends Fragment {
                                 Log.d(TAG, "onClick: yes");
 
                                 shimmer.cancel();
-                                //scalableVideoView.stop();
-                                //scalableVideoView.release();
+                                scalableVideoView.stop();
+                                scalableVideoView.release();
 
                                 Log.i(TAG, "Final appearance: " + appearanceBase + "outfit0");
 
                                 // finalize user's appearance/outfit combo in their node
                                 databaseReference.child("users").child(userId).child("appearanceFinal")
-                                        .setValue(appearanceBase + "outfit0");
+                                        .setValue(appearanceOutfitCombo);
 
                                 Intent iNext = new Intent(getActivity(), ViewCompanionActivity.class);
                                 startActivity(iNext);
@@ -153,7 +160,6 @@ public class Outfit0Fragment extends Fragment {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
                     Log.i("videoView0", "Video view is prepared");
-                    //Log.i("videoView3", "Uri used is: " + uriParsed.toString());
 
                     scalableVideoView.setVisibility(View.VISIBLE);
                     videoProgressBar.setVisibility(View.GONE);
@@ -174,12 +180,14 @@ public class Outfit0Fragment extends Fragment {
         }
     }
 
-    /*private void playVideoView() throws IOException {
+    private void playVideoView(Uri uri) throws IOException {
 
         Log.i("videoView0", "Video view is doing something");
 
-        uriParsed = Uri.parse("https://firebasestorage.googleapis.com/v0/b/sodalis-53c9d.appspot.com/o/venice.mp4?alt=media&token=152d3535-e0f5-48ca-8737-2fb2c863858b");
+        // grab uri that was built earlier
+        uriParsed = uri;
 
+        // set uri as source for video
         scalableVideoView.setDataSource(getActivity(), uriParsed);
 
         scalableVideoView.prepareAsync(new MediaPlayer.OnPreparedListener() {
@@ -194,11 +202,46 @@ public class Outfit0Fragment extends Fragment {
                 scalableVideoView.start();
                 scalableVideoView.setVolume(0,0);
                 scalableVideoView.setLooping(true);
+            }
+        });
+    }// end of videoview
 
-                if (scalableVideoView.isPlaying()) {
-                    videoProgressBar.setVisibility(View.GONE);
+    private String getOutfitComboToDisplay(String appearanceBaseToUse) {
+
+        // builds combo to play proper outfit pre-selection video
+        String comboForVideo = appearanceBaseToUse + "outfit0";
+
+        Log.i("comboVideoRef", "User's video ref: " + comboForVideo);
+
+        // builds url reference based on appearance/outfit combo
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+        StorageReference videoDownloadUrl = storageReference
+                .child("/" + "appearanceFinals" + "/" + comboForVideo + ".mp4");
+
+        Log.i("comboVideoRef", "Storage reference is: " + videoDownloadUrl.toString());
+
+        videoDownloadUrl.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+        {
+            @Override
+            public void onSuccess(Uri downloadUrl)
+            {
+                Log.i("comboVideoRef", "Download url is: " + downloadUrl);
+
+                // play video for outfit preview
+                try {
+                    playVideoView(downloadUrl);
+                } catch (IOException e) {
                 }
             }
         });
-    } */ // end of videoview
+
+        videoDownloadUrl.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i("comboVideoRef", "Download url failed");
+            }
+        });
+
+        return comboForVideo;
+    }
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -17,9 +18,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerButton;
 import com.yqritc.scalablevideoview.ScalableVideoView;
@@ -40,18 +46,19 @@ public class Appearance0Fragment extends Fragment {
     private String userId;
 
     private DatabaseReference databaseReference;
+    private FirebaseStorage firebaseStorage;
 
     private static final String TAG = "Appearance0";
 
     /**
      * shows one of the video views for choosing a Companion appearance. First one will be premium
-     * for now. Is hardcoded to play a local video for now because I burn through my firebase
-     * allotment if I load the videos everytime I start the activity. Commented methods work though
-     * getting the video from the fb storage. Next step is to store the user's selection and have it
-     * correspond with the correct storage place. And come up with a system that keeps the user's
-     * selections organized so they can be easily accessed later. Contains UI to view and buy more
-     * 'coins' also. Need to come up with a better name than coins obviously. Masculine button
-     * functionality will be added next also actually.
+     * for now just to show what it would look like. Hardcoded to play a local video for now because
+     * I burn through my firebase allotment if I load the videos every time I start the activity.
+     * Commented methods work getting the video from the fb storage. Next step is to store the user's
+     * selection and have it correspond with the correct storage place. And come up with a system
+     * that keeps the user's selections organized so they can be easily accessed later. Contains UI
+     * to view and buy more 'coins' also. Need to come up with a better name than coins obviously.
+     * Masculine button functionality will be added last.
      *
      */
 
@@ -76,14 +83,11 @@ public class Appearance0Fragment extends Fragment {
         userId = getUid();
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        firebaseStorage = FirebaseStorage.getInstance();
 
-        playVideoLocal();
+        //playVideoLocal();
 
-        /*try {
-            playVideoView();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+        getAppearanceRefToDisplay();
 
         // confirm user's selection before moving on to next activity
         chooseButton.setOnClickListener(new View.OnClickListener() {
@@ -161,11 +165,11 @@ public class Appearance0Fragment extends Fragment {
         }
     }
 
-    /*private void playVideoView() throws IOException {
+    private void playVideoView(Uri uri) throws IOException {
 
         Log.i("videoView0", "Video view is doing something");
 
-        uriParsed = Uri.parse("https://firebasestorage.googleapis.com/v0/b/sodalis-53c9d.appspot.com/o/venice.mp4?alt=media&token=152d3535-e0f5-48ca-8737-2fb2c863858b");
+        uriParsed = uri;
 
         scalableVideoView.setDataSource(getActivity(), uriParsed);
 
@@ -175,19 +179,50 @@ public class Appearance0Fragment extends Fragment {
                 Log.i("videoView0", "Video view is prepared");
                 Log.i("videoView0", "Uri used is: " + uriParsed.toString());
 
+                // hide progress bar and show video viewer
                 scalableVideoView.setVisibility(View.VISIBLE);
                 videoProgressBar.setVisibility(View.GONE);
 
                 scalableVideoView.start();
                 scalableVideoView.setVolume(0,0);
                 scalableVideoView.setLooping(true);
+            }
+        });
+    } // end of videoview
 
-                if (scalableVideoView.isPlaying()) {
-                    videoProgressBar.setVisibility(View.GONE);
+    private void getAppearanceRefToDisplay() {
+
+        Log.i("appearanceBaseRef0", "User's video ref: " + "appearance0");
+
+        // builds url reference based on appearance option
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+        StorageReference videoDownloadUrl = storageReference
+                .child("/" + "appearanceBases" + "/" + "appearance0" + ".mp4");
+
+        Log.i("appearanceBaseRef0", "Storage reference is: " + videoDownloadUrl.toString());
+
+        videoDownloadUrl.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+        {
+            @Override
+            public void onSuccess(Uri downloadUrl)
+            {
+                Log.i("appearanceBaseRef0", "Download url is: " + downloadUrl);
+
+                try {
+                    playVideoView(downloadUrl);
+                } catch (IOException e) {
+                    Log.i("appearanceBaseRef0", "Play video view failed");
                 }
             }
         });
-    } */ // end of videoview
+
+        videoDownloadUrl.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i("appearanceBaseRef0", "Download url failed");
+            }
+        });
+    }
 
     // TODO: if user's coins are less than the appearance costs, launch the purchase coins activity
     // only needs to be done in the fragments that have premium appearances
