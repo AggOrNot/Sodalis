@@ -41,6 +41,8 @@ public class ViewCompanionCloseFragment extends Fragment {
     private DatabaseReference mDatabaseRef;
     private FirebaseStorage firebaseStorage;
 
+    private OnVideoLoadedListener callback;
+
     private static final String TAG = "ViewCloseFragment";
 
     /**
@@ -150,6 +152,9 @@ public class ViewCompanionCloseFragment extends Fragment {
                 Log.i(TAG, "Video view is prepared");
                 Log.i(TAG, "Uri used is: " + uriParsed.toString());
 
+                // get ready to tell view companion activity that the video has finished loading
+                callback.onVideoLoaded(true);
+
                 // hide progress bar and show video viewer
                 scalableVideoView.setVisibility(View.VISIBLE);
                 videoProgressBar.setVisibility(View.GONE);
@@ -201,5 +206,13 @@ public class ViewCompanionCloseFragment extends Fragment {
     // get userid from db
     public String getUid() {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
+
+    public void setVideoLoadedListener(OnVideoLoadedListener callback) {
+        this.callback = callback;
+    }
+
+    public interface OnVideoLoadedListener {
+        void onVideoLoaded(boolean isVideoLoaded);
     }
 }

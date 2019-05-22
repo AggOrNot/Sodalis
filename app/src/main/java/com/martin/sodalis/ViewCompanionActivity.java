@@ -29,7 +29,8 @@ import com.google.firebase.storage.StorageReference;
 import com.yqritc.scalablevideoview.ScalableVideoView;
 
 
-public class ViewCompanionActivity extends AppCompatActivity {
+public class ViewCompanionActivity extends AppCompatActivity
+        implements ViewCompanionCloseFragment.OnVideoLoadedListener {
 
     private Button changeAppearanceButton;
 
@@ -189,7 +190,12 @@ public class ViewCompanionActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    return new ViewCompanionCloseFragment();
+                    // create new fragment and use the attacher built earlier. Still behaves the
+                    // same as the regular fragment down there.
+                    Fragment viewCompanionCloseFragment = new ViewCompanionCloseFragment();
+                    onAttachFragment(viewCompanionCloseFragment);
+
+                    return viewCompanionCloseFragment;
                 case 1:
                     return new ViewCompanionFarFragment();
                 default:
@@ -201,6 +207,23 @@ public class ViewCompanionActivity extends AppCompatActivity {
         public int getCount() {
 
             return 2;
+        }
+    }
+
+    // put stuff to do here once the video is loaded in the view close fragment
+    public void onVideoLoaded(boolean isVideoLoaded) {
+        if (isVideoLoaded) { // is true
+            // show toggle view button to user so it can be used
+            toggleViews.setVisibility(View.VISIBLE);
+            Log.i(TAG, "Fragment communication worked. Video loaded and toggle displayed");
+        }
+    }
+
+    // set up listener when the fragment is generated
+    public void onAttachFragment(Fragment fragment) {
+        if (fragment instanceof ViewCompanionCloseFragment) {
+            ViewCompanionCloseFragment viewCompanionCloseFragment = (ViewCompanionCloseFragment) fragment;
+            viewCompanionCloseFragment.setVideoLoadedListener(this);
         }
     }
 }
