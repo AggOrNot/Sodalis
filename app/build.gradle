@@ -40,6 +40,7 @@ dependencies {
     implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
     implementation 'com.romainpiel.shimmer:library:1.4.0@aar'
     implementation 'com.yqritc:android-scalablevideoview:1.0.4'
+    implementation 'me.relex:circleindicator:1.2.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

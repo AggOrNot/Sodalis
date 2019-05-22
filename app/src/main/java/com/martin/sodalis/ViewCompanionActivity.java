@@ -125,7 +125,8 @@ public class ViewCompanionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent iChange = new Intent(getApplicationContext(), PurchaseAppearancesActivity.class);
+                // send user to choose outfit activity. Not sure if they will be able to redo their base
+                Intent iChange = new Intent(getApplicationContext(), ChooseOutfitActivity.class);
                 startActivity(iChange);
             }
         });

@@ -10,11 +10,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class PurchaseAppearancesActivity extends AppCompatActivity {
 
@@ -30,6 +33,8 @@ public class PurchaseAppearancesActivity extends AppCompatActivity {
      */
 
     private ViewPager mViewPager;
+
+    private static final String TAG = "AppearancesActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +76,13 @@ public class PurchaseAppearancesActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setOffscreenPageLimit(3); // make sure to change this if adding anymore pages, keeps videos solid/smooth
-    }
+
+        // initialize and set up circle indicator to show viewpager position and page amount to user
+        CircleIndicator indicator = findViewById(R.id.position_indicator);
+        indicator.setViewPager(mViewPager);
+
+        mSectionsPagerAdapter.registerDataSetObserver(indicator.getDataSetObserver());
+    } // end of oncreate
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

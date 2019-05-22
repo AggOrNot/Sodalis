@@ -36,7 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/toggle_zoom"/>
+        android:src="@drawable/toggle_zoom_white"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/change_appearance_button"

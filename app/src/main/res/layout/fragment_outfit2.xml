@@ -34,22 +34,6 @@
         android:text="Outfit2"
         android:textSize="30sp"/>
 
-    <ImageView
-        android:id="@+id/arrow_right"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/arrow_right" />
-
-    <ImageView
-        android:id="@+id/arrow_left"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:src="@drawable/arrow_left"/>
-
     <Button
         android:id="@+id/appearance_button2"
         android:layout_width="wrap_content"

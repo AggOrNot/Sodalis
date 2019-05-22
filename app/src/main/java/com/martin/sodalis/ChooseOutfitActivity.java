@@ -1,5 +1,6 @@
 package com.martin.sodalis;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -8,11 +9,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class ChooseOutfitActivity extends AppCompatActivity {
 
@@ -28,6 +33,8 @@ public class ChooseOutfitActivity extends AppCompatActivity {
      */
 
     private ViewPager mViewPager;
+
+    private static final String TAG = "ChooseOutfitActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +77,27 @@ public class ChooseOutfitActivity extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setOffscreenPageLimit(3); // KEEPS VIDEOS SMOOTH
 
+        // initialize and set up circle indicator to show viewpager position and page amount to user
+        CircleIndicator indicator = findViewById(R.id.position_indicator);
+        indicator.setViewPager(mViewPager);
+
+        mSectionsPagerAdapter.registerDataSetObserver(indicator.getDataSetObserver());
     } // end of oncreate
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(getApplicationContext())
+
+                .setMessage("Please choose an outfit before exiting.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Log.d(TAG, "onClick: ok");
+                    }
+                })
+                .show();
+    }
+
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

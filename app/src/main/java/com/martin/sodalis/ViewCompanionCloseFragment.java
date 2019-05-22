@@ -1,5 +1,6 @@
 package com.martin.sodalis;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -77,10 +78,12 @@ public class ViewCompanionCloseFragment extends Fragment {
 
                                     if (dataSnapshot.exists()) {
 
+                                        // get appearance base reference and save it
                                         appearanceBase = dataSnapshot.getValue().toString();
 
-                                        Log.i(TAG, "Appearance final is: " + appearanceBase);
+                                        Log.i(TAG, "Appearance base is: " + appearanceBase);
 
+                                        // begin logic for getting correct video location and playing it
                                         getDownloadUrlForAppearance(appearanceBase);
                                     }
                                 }
@@ -137,6 +140,7 @@ public class ViewCompanionCloseFragment extends Fragment {
         // grab parsed uri
         uriParsed = uri;
 
+        // set data source as the uri we got
         scalableVideoView.setDataSource(getActivity(), uriParsed);
 
         // play video on async so they can all play smoothly on their own thread
@@ -158,12 +162,12 @@ public class ViewCompanionCloseFragment extends Fragment {
         });
     } // end of videoview
 
-    // gets correct downloard url from corresponding storage location
+    // gets correct download url from corresponding storage location
     private void getDownloadUrlForAppearance(String appearanceBaseToUse) {
 
         Log.i(TAG, "User's video ref: " + appearanceBaseToUse);
 
-        // builds url reference based on appearance/outfit combo
+        // builds url reference based on appearance base
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
         StorageReference videoDownloadUrl = storageReference
                 .child("/" + "appearanceBases" + "/" + appearanceBaseToUse + ".mp4");

@@ -12,13 +12,6 @@
         app:scalableType="centerCrop"
         android:visibility="gone"/>
 
-    <!--<VideoView
-        android:id="@+id/video_view_tester"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"/> -->
-
     <ProgressBar
         android:id="@+id/videoview_bar"
         android:layout_marginLeft="50dp"
@@ -33,21 +26,13 @@
         android:layout_marginTop="50dp"
         android:visibility="gone"/>
 
-    <ImageView
-        android:id="@+id/arrow_right"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/arrow_right" />
-
     <Button
         android:id="@+id/masculine_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="60dp"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
         android:text="@string/masculine_button"
