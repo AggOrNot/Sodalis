@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/eggshell_bg"
-    android:fitsSystemWindows="true">
+    android:background="@drawable/eggshell_bg">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/container"
@@ -17,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="80dp"
         android:text="@string/appearance_outfit_prompt"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold"
@@ -28,7 +27,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
         android:src="@drawable/coins_icon_grey"/>
 
@@ -42,6 +41,25 @@
         android:text="0"
         android:textStyle="bold"
         android:textSize="20sp"
+        android:textColor="@color/colorMenuGrey"/>
+
+    <ImageView
+        android:id="@+id/back_to_appearances"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/arrow_left"/>
+
+    <TextView
+        android:id="@+id/back_appearances_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/back_to_appearances"
+        android:layout_alignTop="@id/back_to_appearances"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/back_to_apppearances"
         android:textColor="@color/colorMenuGrey"/>
 
     <me.relex.circleindicator.CircleIndicator

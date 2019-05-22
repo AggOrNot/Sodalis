@@ -726,6 +726,7 @@
     <string name="change_appearance">Change Outfit</string>
     <string name="masculine_button">Masculine Appearances</string>
     <string name="feminine_appearances">Feminine Appearances</string>
+    <string name="back_to_apppearances">Back to appearances</string>
 
     <!-- to choose premium button amount, read db to see what's needed and then just do a
     setText as Premium 20 or whatever inside the button. Simple. -->

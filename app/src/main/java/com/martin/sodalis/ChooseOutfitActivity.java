@@ -24,6 +24,7 @@ public class ChooseOutfitActivity extends AppCompatActivity {
     private TextView coinsAmount;
 
     private ImageView coinsImage;
+    private ImageView backToAppearancesButton;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -68,6 +69,16 @@ public class ChooseOutfitActivity extends AppCompatActivity {
             }
         });
 
+        backToAppearancesButton = findViewById(R.id.back_to_appearances);
+        backToAppearancesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iAppearances = new Intent(getApplicationContext(), PurchaseAppearancesActivity.class);
+                startActivity(iAppearances);
+                finish();
+            }
+        });
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -83,21 +94,6 @@ public class ChooseOutfitActivity extends AppCompatActivity {
 
         mSectionsPagerAdapter.registerDataSetObserver(indicator.getDataSetObserver());
     } // end of oncreate
-
-    @Override
-    public void onBackPressed() {
-        new AlertDialog.Builder(getApplicationContext())
-
-                .setMessage("Please choose an outfit before exiting.")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Log.d(TAG, "onClick: ok");
-                    }
-                })
-                .show();
-    }
-
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

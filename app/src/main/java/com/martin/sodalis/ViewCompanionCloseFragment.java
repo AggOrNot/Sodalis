@@ -208,10 +208,12 @@ public class ViewCompanionCloseFragment extends Fragment {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
+    // set up the video ready listener to shoot back to view companion activity
     public void setVideoLoadedListener(OnVideoLoadedListener callback) {
         this.callback = callback;
     }
 
+    // interface to be used when video is ready
     public interface OnVideoLoadedListener {
         void onVideoLoaded(boolean isVideoLoaded);
     }
