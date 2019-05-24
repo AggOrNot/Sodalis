@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -41,13 +43,8 @@ public class ViewCompanionActivity extends AppCompatActivity
 
     private String userId;
     private String companionNameMain;
-    private String appearanceFinal;
 
-    private Uri uriParsed;
-
-    private ScalableVideoView scalableVideoView;
-
-    private ProgressBar videoProgressBar;
+    private Animation fadeIn;
 
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabaseRef;
@@ -88,6 +85,8 @@ public class ViewCompanionActivity extends AppCompatActivity
         // initialize and read user's Companion name from db and display. Hide until loaded
         nameTextview = findViewById(R.id.companion_name);
         nameTextview.setVisibility(View.GONE);
+
+        fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 
         if ((userId = getUid()) != null) {
 
@@ -205,7 +204,6 @@ public class ViewCompanionActivity extends AppCompatActivity
 
         @Override
         public int getCount() {
-
             return 2;
         }
     }
@@ -214,6 +212,7 @@ public class ViewCompanionActivity extends AppCompatActivity
     public void onVideoLoaded(boolean isVideoLoaded) {
         if (isVideoLoaded) { // is true
             // show toggle view button to user so it can be used
+            toggleViews.startAnimation(fadeIn);
             toggleViews.setVisibility(View.VISIBLE);
             Log.i(TAG, "Fragment communication worked. Video loaded and toggle displayed");
         }

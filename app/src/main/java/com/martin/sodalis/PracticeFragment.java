@@ -84,14 +84,10 @@ public class PracticeFragment extends Fragment {
 
     private ImageView backgroundImage;
 
-    private VideoView videoViewTester;
-
     private View practiceView;
     private View typingCircle1;
     private View typingCircle2;
     private View typingCircle3;
-
-    private RelativeLayout videoViewLayout;
 
     private Animation fadeRepeat;
     private Animation fadeIn;
@@ -175,12 +171,6 @@ public class PracticeFragment extends Fragment {
         // ready to be used
         backgroundImage = practiceView.findViewById(R.id.background);
 
-        videoViewLayout = practiceView.findViewById(R.id.video_view_layout);
-        videoViewLayout.setVisibility(View.GONE);
-
-        videoViewTester = practiceView.findViewById(R.id.video_view_tester);
-        videoViewTester.setVisibility(View.GONE);
-
         typingCircle1 = practiceView.findViewById(R.id.typing_circle1);
         typingCircle2 = practiceView.findViewById(R.id.typing_circle2);
         typingCircle3 = practiceView.findViewById(R.id.typing_circle3);
@@ -190,7 +180,6 @@ public class PracticeFragment extends Fragment {
 
         timedEventText = practiceView.findViewById(R.id.timed_event_text);
         continuePrompt = practiceView.findViewById(R.id.continue_prompt);
-        videoDismiss = practiceView.findViewById(R.id.videoview_dismiss_text);
 
         // prep animations
         fadeRepeat = AnimationUtils.loadAnimation(getContext(), R.anim.fade_repeat);
@@ -2017,7 +2006,7 @@ public class PracticeFragment extends Fragment {
                             isModifierFlagPresent = true;
 
                             checkForContinuePrompt();
-                            checkForVideoFlag();
+                            //checkForVideoFlag();
                             checkForPaywall();
                             checkForTimedEvent();
                             checkForKeySceneFlag();
@@ -2672,7 +2661,7 @@ public class PracticeFragment extends Fragment {
     }
 
     // checks scene node for video reference
-    public void checkForVideoFlag() {
+    /*public void checkForVideoFlag() {
 
         mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)
                 .child("videoFlag").addListenerForSingleValueEvent(
@@ -2702,7 +2691,6 @@ public class PracticeFragment extends Fragment {
                                 {
                                     Log.i("checkVideoRef", "Download url is: " + downloadUrl);
 
-                                    fetchVideoUrlFromFirebase(downloadUrl.toString());
                                 }
                             });
 
@@ -2720,84 +2708,7 @@ public class PracticeFragment extends Fragment {
                     }
                 }
         );
-    }
-
-    // downloads video file from storage using reference built earlier
-    private void fetchVideoUrlFromFirebase(String videoRefFromDb) {
-
-        Log.i("fetchVideo", "Video ref from db is: " + videoRefFromDb);
-
-        StorageReference storageRef = firebaseStorage
-                .getReferenceFromUrl(videoRefFromDb);
-        Task<Uri> tag = storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                // Download url of file
-                String uriString = uri.toString();
-
-                // parse it to be loaded
-                Uri uriParsed = Uri.parse(uriString);
-
-                Log.i("fetchVideo", "Uri string is: " + uriString);
-
-                playVideoView(uriParsed);
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.i("TAG", e.getMessage());
-                    }
-                });
-    }
-
-    // this functionally works now, but I'm going to change it to the scalable video view since I
-    // can't get this native one to crop properly. I'm pretty sure most of this can be re-used so
-    // we'll keep it for now.
-    private void playVideoView(Uri uri) {
-
-        Log.i("videoView", "Video view is doing something");
-
-        videoViewTester.setVideoURI(uri);
-
-        videoViewTester.setVisibility(View.VISIBLE);
-        videoViewLayout.setVisibility(View.VISIBLE);
-        videoProgressBar.setVisibility(View.VISIBLE);
-
-        videoViewTester.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                // end progress dialog or whatever here
-                videoProgressBar.setVisibility(View.GONE);
-
-                Log.i("videoView", "Video view is prepared and doing stuff");
-                videoViewTester.start();
-                videoDismiss.setVisibility(View.VISIBLE);
-            }
-        });
-
-        videoViewTester.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                // this loops the video
-                Log.i("videoView", "It's done and is going again");
-
-                videoViewTester.start();
-            }
-        });
-
-        videoViewTester.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("videoView", "Stopping the video with the onclick");
-
-                videoViewTester.stopPlayback();
-                videoViewTester.setVisibility(View.GONE);
-                videoViewLayout.setVisibility(View.GONE);
-                videoDismiss.setVisibility(View.GONE);
-            }
-        });
-    }
+    }*/
 
     // animation to smooth out any progress bars being used
     private void setProgressAnimate(NumberProgressBar pb, int progressTo) {

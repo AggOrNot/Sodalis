@@ -183,47 +183,4 @@
         custom:progress_text_visibility="invisible"
         />
 
-    <RelativeLayout android:id="@+id/video_view_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#000000"
-        android:visibility="gone">
-
-        <VideoView
-            android:id="@+id/video_view_tester"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="gone"/>
-
-        <ProgressBar
-            android:id="@+id/videoview_bar"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_centerInParent="true"
-            android:maxWidth="1dp"
-            android:theme="@style/ProgressBarStyle"
-            android:indeterminate="true"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/videoview_dismiss_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="120dp"
-            android:text="@string/video_dismiss"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            android:alpha="0.9"
-            android:visibility="gone"/>
-
-    </RelativeLayout>
-
 </RelativeLayout>
