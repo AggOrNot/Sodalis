@@ -1,5 +1,6 @@
 package com.martin.sodalis;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -10,6 +11,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Fade;
+import android.transition.Slide;
+import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -28,7 +32,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.yqritc.scalablevideoview.ScalableVideoView;
 
 
 public class ViewCompanionActivity extends AppCompatActivity
@@ -68,6 +71,9 @@ public class ViewCompanionActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_companion);
+
+        // transition animation
+        setupWindowAnimations();
 
         // screen and status bar modifiers
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -126,8 +132,18 @@ public class ViewCompanionActivity extends AppCompatActivity
             public void onClick(View v) {
 
                 // send user to choose outfit activity. Not sure if they will be able to redo their base
-                Intent iChange = new Intent(getApplicationContext(), ChooseOutfitActivity.class);
-                startActivity(iChange);
+                Intent iChange = new Intent(ViewCompanionActivity.this, ChooseOutfitActivity.class);
+
+                // set up transition for image
+                View sharedView = backButton;
+                String transitionName = getString(R.string.back_arrow_transition);
+
+                // execute transition
+                ActivityOptions transitionActivityOptions = ActivityOptions
+                        .makeSceneTransitionAnimation(ViewCompanionActivity.this, sharedView, transitionName);
+
+                // send user to next activity and transition to bundle for the next activity
+                startActivity(iChange, transitionActivityOptions.toBundle());
             }
         });
 
@@ -224,5 +240,13 @@ public class ViewCompanionActivity extends AppCompatActivity
             ViewCompanionCloseFragment viewCompanionCloseFragment = (ViewCompanionCloseFragment) fragment;
             viewCompanionCloseFragment.setVideoLoadedListener(this);
         }
+    }
+
+    // setup transition animations
+    private void setupWindowAnimations() {
+        Fade fade = new Fade();
+        fade.setDuration(1000);
+        getWindow().setEnterTransition(fade);
+        getWindow().setReturnTransition(fade);
     }
 }

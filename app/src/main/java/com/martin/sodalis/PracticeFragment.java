@@ -2592,7 +2592,15 @@ public class PracticeFragment extends Fragment {
                                 {
                                     Log.i("checkAudioRef", "Download url is: " + downloadUrl);
 
-                                    fetchAudioUrlFromFirebase(downloadUrl.toString());
+                                    try {
+                                        String url = downloadUrl.toString();
+                                        mediaPlayer.setDataSource(url);
+                                        mediaPlayer.prepareAsync();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    //fetchAudioUrlFromFirebase(downloadUrl.toString());
                                 }
                             });
 
@@ -2658,6 +2666,53 @@ public class PracticeFragment extends Fragment {
                 });
             }
         });
+    }
+
+    // check for Companion appearances and send user to the appearance activity
+    private void detectAppearanceEvent() {
+
+        mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)
+                .child("appearanceEvent").addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        if (dataSnapshot.exists()) {
+                            Log.i("appearanceEvent", "Appearance event is present");
+
+                            Intent i = new Intent(getActivity(), PurchaseAppearancesActivity.class);
+                            startActivity(i);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                }
+        );
+    }
+
+    // use this to check for stuff that won't really ever be used more than once in the beginning
+    private void checkForEarlyStoryModifier() {
+
+        mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)
+                .child("earlyStoryModifier").addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        if (dataSnapshot.exists()) {
+                            detectAppearanceEvent();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                }
+        );
     }
 
     // checks scene node for video reference

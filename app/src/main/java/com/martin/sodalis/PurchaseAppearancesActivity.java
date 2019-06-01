@@ -23,6 +23,8 @@ public class PurchaseAppearancesActivity extends AppCompatActivity {
 
     private TextView coinsAmount;
 
+    private int actualUserCoinsOwned;
+
     private ImageView coinsImage;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;

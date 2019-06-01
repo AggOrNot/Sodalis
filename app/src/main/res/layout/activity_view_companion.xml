@@ -28,7 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/arrow_left"/>
+        android:src="@drawable/arrow_left"
+        android:transitionName="@string/back_arrow_transition"/>
 
     <ImageView
         android:id="@+id/toggle_views"

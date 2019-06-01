@@ -26,6 +26,9 @@
     <string name="thirty999">\$39.99</string>
     <string name="ninety999">\$99.99</string>
 
+    <!-- Transition names -->
+    <string name="back_arrow_transition">back arrow transition</string>
+
     <!-- info entry strings -->
     <string name="auth_failed">Registration failed. Please try again in a minute.</string>
     <string name="auth_success">Successfully registered. Welcome to Sodalis!</string>

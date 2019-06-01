@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -41,6 +43,9 @@ public class Outfit0Fragment extends Fragment {
     private ScalableVideoView scalableVideoView;
 
     private ProgressBar videoProgressBar;
+
+    private Animation fadeOut;
+    private Animation fadeIn;
 
     private DatabaseReference databaseReference;
     private FirebaseStorage firebaseStorage;
@@ -83,6 +88,9 @@ public class Outfit0Fragment extends Fragment {
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         firebaseStorage = FirebaseStorage.getInstance();
+
+        fadeOut = AnimationUtils.loadAnimation(getContext(), R.anim.fade_out);
+        fadeIn = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
 
         // get user's base appearance from their node in order to build final appearance later
         databaseReference.child("users").child(userId).child("appearanceBase")
@@ -196,12 +204,30 @@ public class Outfit0Fragment extends Fragment {
                 Log.i("videoView0", "Video view is prepared");
                 Log.i("videoView0", "Uri used is: " + uriParsed.toString());
 
-                scalableVideoView.setVisibility(View.VISIBLE);
-                videoProgressBar.setVisibility(View.GONE);
+                // video is loaded, begin fade out of progress bar to cleanly transition to video view
+                videoProgressBar.startAnimation(fadeOut);
+                fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                    }
 
-                scalableVideoView.start();
-                scalableVideoView.setVolume(0,0);
-                scalableVideoView.setLooping(true);
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        // fully hide progress bar and show video viewer
+                        scalableVideoView.startAnimation(fadeIn);
+                        scalableVideoView.setVisibility(View.VISIBLE);
+                        videoProgressBar.setVisibility(View.GONE);
+
+                        // mute video and set it to loop
+                        scalableVideoView.start();
+                        scalableVideoView.setVolume(0,0);
+                        scalableVideoView.setLooping(true);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                    }
+                });
             }
         });
     }// end of videoview

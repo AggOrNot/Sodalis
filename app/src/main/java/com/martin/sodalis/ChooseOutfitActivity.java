@@ -11,6 +11,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -41,6 +43,7 @@ public class ChooseOutfitActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_outfit);
+        setupWindowAnimations();
 
         // screen and status bar modifiers
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -94,6 +97,13 @@ public class ChooseOutfitActivity extends AppCompatActivity {
 
         mSectionsPagerAdapter.registerDataSetObserver(indicator.getDataSetObserver());
     } // end of oncreate
+
+    // setup transition animations
+    private void setupWindowAnimations() {
+        Fade fade = new Fade();
+        fade.setDuration(1000);
+        getWindow().setEnterTransition(fade);
+    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
