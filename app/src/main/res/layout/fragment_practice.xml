@@ -133,6 +133,22 @@
         android:textAlignment="center"
         android:background="@drawable/text_border"/>
 
+    <TextView
+        android:id="@+id/open_article_viewer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_reply_D"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:background="@drawable/text_border"
+        android:text="@string/open_article_viewer"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:visibility="gone"/>
+
     <!--<ProgressBar
         android:id="@+id/timer_bar"
         android:theme="@style/ProgressBarStyle"

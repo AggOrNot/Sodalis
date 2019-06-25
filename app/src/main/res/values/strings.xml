@@ -731,6 +731,10 @@
     <string name="feminine_appearances">Feminine Appearances</string>
     <string name="back_to_apppearances">Back to appearances</string>
 
+    <!-- Article viewer strings -->
+    <string name="content_title">OTIndex</string>
+    <string name="open_article_viewer">Open article</string>
+
     <!-- to choose premium button amount, read db to see what's needed and then just do a
     setText as Premium 20 or whatever inside the button. Simple. -->
 
@@ -746,5 +750,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="exit">Exit</string>
 
 </resources>

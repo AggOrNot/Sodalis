@@ -13,6 +13,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.TypedValue;
@@ -81,6 +82,7 @@ public class PracticeFragment extends Fragment {
     private TextView timedEventText;
     private TextView continuePrompt;
     private TextView videoDismiss;
+    private TextView openArticleViewer;
 
     private ImageView backgroundImage;
 
@@ -235,6 +237,8 @@ public class PracticeFragment extends Fragment {
 
         timedEventText.setVisibility(View.GONE);
         continuePrompt.setVisibility(View.GONE);
+
+        openArticleViewer = practiceView.findViewById(R.id.open_article_viewer);
 
         mediaPlayer = new MediaPlayer();
 
@@ -694,6 +698,9 @@ public class PracticeFragment extends Fragment {
         userReplyB.setVisibility(View.GONE);
         userReplyC.setVisibility(View.GONE);
         userReplyD.setVisibility(View.GONE);
+
+        openArticleViewer.clearAnimation();
+        openArticleViewer.setVisibility(View.GONE);
     }
 
     public String getUid() {
@@ -1730,7 +1737,7 @@ public class PracticeFragment extends Fragment {
     }
 
     // sliding animation used for user replies A and C
-    public void slideFromRight(View view){
+    public void slideFromRight(View view) {
         TranslateAnimation animate = new TranslateAnimation(practiceView.getWidth(), 0,0,0);
         animate.setDuration(200);
         animate.setFillAfter(true);
@@ -1739,8 +1746,17 @@ public class PracticeFragment extends Fragment {
     }
 
     // sliding animation used for user replies B and D
-    public void slideFromLeft(View view){
+    public void slideFromLeft(View view) {
         TranslateAnimation animate = new TranslateAnimation(-practiceView.getWidth(),0,0,0);
+        animate.setDuration(200);
+        animate.setFillAfter(true);
+        view.startAnimation(animate);
+        view.setVisibility(View.VISIBLE);
+    }
+
+    // sliding animation used for article viewer button (or anything else that needs to slide from the bottom actually)
+    public void slideFromBottom(View view) {
+        TranslateAnimation animate = new TranslateAnimation(0, 0, practiceView.getHeight(), 0);
         animate.setDuration(200);
         animate.setFillAfter(true);
         view.startAnimation(animate);
@@ -2011,9 +2027,11 @@ public class PracticeFragment extends Fragment {
                             checkForTimedEvent();
                             checkForKeySceneFlag();
                             checkForNextAnyway();
+                            checkForArticleContent();
 
                         } else {
                             Log.i("checkModifier", "Modifier flag is not present");
+                            openArticleViewer.setVisibility(View.GONE);
 
                             isModifierFlagPresent = false;
                         }
@@ -2704,6 +2722,43 @@ public class PracticeFragment extends Fragment {
 
                         if (dataSnapshot.exists()) {
                             detectAppearanceEvent();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                }
+        );
+    }
+
+    // check if internal "news" article exists and launch fragment as needed
+    private void checkForArticleContent() {
+
+        mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)
+                .child("articleContent").addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        if (dataSnapshot.exists()) {
+                            Log.i("checkForArticle",
+                                    "Article content exists");
+
+                            openArticleViewer.setVisibility(View.VISIBLE);
+                            slideFromBottom(openArticleViewer);
+
+                            openArticleViewer.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent i = new Intent(getActivity(), ArticleViewerActivity.class);
+                                    startActivity(i);
+                                }
+                            });
+                        } else {
+                            openArticleViewer.clearAnimation();
+                            openArticleViewer.setVisibility(View.GONE);
                         }
                     }
 

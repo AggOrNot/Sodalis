@@ -59,6 +59,9 @@
         <activity
             android:name=".PurchaseCoinsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ArticleViewerActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

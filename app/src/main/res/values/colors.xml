@@ -16,4 +16,13 @@
     <color name="colorMint">#aaf0d1</color>
     <color name="colorMenuGrey">#728878</color>
 
+    <color name="colorTextPrimary">#303030</color>
+    <color name="colorTextSecondary">#828C8A</color>
+
+    <color name="otiPrimary">#0FB48F</color>
+    <color name="otiPrimaryDark">#0FB48F</color>
+    <color name="otiPrimaryLight">#AFFDF3</color>
+    <color name="otiAccent">#AFFDF3</color>
+    <color name="otiBackground">#F9FAF9</color>
+
 </resources>

@@ -249,4 +249,8 @@ public class ViewCompanionActivity extends AppCompatActivity
         getWindow().setEnterTransition(fade);
         getWindow().setReturnTransition(fade);
     }
+
+    // TODO: Write get coins owned by user here, show with coins amount. Read in each fragment that
+    // has a purchase button. Subtract amount from user's coins amount or send them to the purchase
+    // coins activity
 }
