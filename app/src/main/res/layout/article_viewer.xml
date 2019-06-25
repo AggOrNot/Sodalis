@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/eggshell_bg">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <RelativeLayout
+            android:id="@+id/content_holder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:background="@drawable/card_holder">
+
+            <ImageView
+                android:id="@+id/exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/x_grey"
+                android:maxWidth="20dp"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"/>
+
+            <TextView
+                android:id="@+id/exit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/exit"
+                android:layout_marginLeft="5dp"
+                android:text="@string/exit"
+                android:textColor="@color/colorMenuGrey"/>
+
+            <TextView
+                android:id="@+id/content_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/exit"
+                android:layout_marginTop="20dp"
+                android:text="@string/content_title"
+                android:textSize="36sp"
+                android:textColor="@color/colorTextPrimary"
+                android:textStyle="bold"/>
+
+            <View
+                android:id="@+id/divider"
+                style="@style/Divider"
+                android:layout_height="1dp"
+                android:layout_below="@id/content_title"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/oti_gradient" />
+
+            <TextView
+                android:id="@+id/content_headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider"
+                android:layout_marginTop="20dp"
+                android:textSize="16sp"
+                android:textColor="@color/colorTextPrimary"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/content_text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/content_headline"
+                android:layout_marginTop="15dp"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/content_text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/content_text1"
+                android:layout_marginTop="15dp"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/content_text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/content_text2"
+                android:layout_marginTop="15dp"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/content_text4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/content_text3"
+                android:layout_marginTop="15dp"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/content_text5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/content_text4"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="16sp"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
