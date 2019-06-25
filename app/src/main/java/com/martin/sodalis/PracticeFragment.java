@@ -131,7 +131,6 @@ public class PracticeFragment extends Fragment {
     private boolean isTimedEventPresent;
 
     private NumberProgressBar numberProgressBar;
-    private ProgressBar videoProgressBar;
 
     private CountDownTimer countDownTimer;
 
@@ -178,7 +177,6 @@ public class PracticeFragment extends Fragment {
         typingCircle3 = practiceView.findViewById(R.id.typing_circle3);
 
         numberProgressBar = practiceView.findViewById(R.id.timer_bar_new);
-        videoProgressBar = practiceView.findViewById(R.id.videoview_bar);
 
         timedEventText = practiceView.findViewById(R.id.timed_event_text);
         continuePrompt = practiceView.findViewById(R.id.continue_prompt);
@@ -2369,6 +2367,7 @@ public class PracticeFragment extends Fragment {
                             timedEventText.startAnimation(fadeRepeat);
 
                             // set and show bar
+                            slideFromBottom(numberProgressBar);
                             numberProgressBar.setVisibility(View.VISIBLE);
                             numberProgressBar.setMax(progressMaxInSeconds * 10);
                             numberProgressBar.setProgress(progressMaxInSeconds * 10);

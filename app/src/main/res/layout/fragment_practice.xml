@@ -196,7 +196,6 @@
         custom:progress_reached_color="@color/colorPrimary"
         custom:progress_unreached_bar_height="1dp"
         custom:progress_reached_bar_height="2dp"
-        custom:progress_text_visibility="invisible"
-        />
+        custom:progress_text_visibility="invisible" />
 
 </RelativeLayout>
