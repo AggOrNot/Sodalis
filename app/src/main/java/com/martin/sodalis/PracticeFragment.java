@@ -105,6 +105,7 @@ public class PracticeFragment extends Fragment {
 
     private String userId;
     private String userSceneId;
+    private String userSceneIdPlusRR;
     private String userName;
     private String companionName;
     private String tempStringHolder;
@@ -405,6 +406,28 @@ public class PracticeFragment extends Fragment {
                         // builds new reply id based on next flag and from preps
                         buildNewSceneReplyId(userSceneId, sceneReplyId);
 
+                        if (isTimedEventPresent) { // is true
+                            numberProgressBar.startAnimation(fadeOut);
+                            fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                                @Override
+                                public void onAnimationStart(Animation animation) {
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animation animation) {
+                                    Log.i("progressAmount", "Progress Amount: " + progressAmount);
+                                    progressAmount = 0;
+                                    fadeOut.cancel();
+                                    fadeOut.reset();
+                                    numberProgressBar.clearAnimation();
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animation animation) {
+                                }
+                            });
+                        }
+
                         // obvious
                         //getAudioRef();
                         getCompanionText();
@@ -452,6 +475,28 @@ public class PracticeFragment extends Fragment {
                         isNextAnywayPresent = checkForNextAnyway();
                         buildNewSceneReplyId(userSceneId, sceneReplyId);
 
+                        if (isTimedEventPresent) { // is true
+                            numberProgressBar.startAnimation(fadeOut);
+                            fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                                @Override
+                                public void onAnimationStart(Animation animation) {
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animation animation) {
+                                    Log.i("progressAmount", "Progress Amount: " + progressAmount);
+                                    progressAmount = 0;
+                                    fadeOut.cancel();
+                                    fadeOut.reset();
+                                    numberProgressBar.clearAnimation();
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animation animation) {
+                                }
+                            });
+                        }
+
                         //getAudioRef();
                         getCompanionText();
                         getUserReplyA();
@@ -495,6 +540,28 @@ public class PracticeFragment extends Fragment {
 
                         isNextAnywayPresent = checkForNextAnyway();
                         buildNewSceneReplyId(userSceneId, sceneReplyId);
+
+                        if (isTimedEventPresent) { // is true
+                            numberProgressBar.startAnimation(fadeOut);
+                            fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                                @Override
+                                public void onAnimationStart(Animation animation) {
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animation animation) {
+                                    Log.i("progressAmount", "Progress Amount: " + progressAmount);
+                                    progressAmount = 0;
+                                    fadeOut.cancel();
+                                    fadeOut.reset();
+                                    numberProgressBar.clearAnimation();
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animation animation) {
+                                }
+                            });
+                        }
 
                         //getAudioRef();
                         getCompanionText();
@@ -540,6 +607,28 @@ public class PracticeFragment extends Fragment {
 
                         isNextAnywayPresent = checkForNextAnyway();
                         buildNewSceneReplyId(userSceneId, sceneReplyId);
+
+                        if (isTimedEventPresent) { // is true
+                            numberProgressBar.startAnimation(fadeOut);
+                            fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                                @Override
+                                public void onAnimationStart(Animation animation) {
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animation animation) {
+                                    Log.i("progressAmount", "Progress Amount: " + progressAmount);
+                                    progressAmount = 0;
+                                    fadeOut.cancel();
+                                    fadeOut.reset();
+                                    numberProgressBar.clearAnimation();
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animation animation) {
+                                }
+                            });
+                        }
 
                         //getAudioRef();
                         getCompanionText();
@@ -2192,6 +2281,46 @@ public class PracticeFragment extends Fragment {
                     }
                 }
         );
+    }
+
+    private void useRelationshipRating(long ratingToUse) {
+
+        if (ratingToUse <= 5) {
+            Log.i("useRR", "Rating to use: " + ratingToUse);
+
+        } else if (ratingToUse > 5 && ratingToUse <= 10) {
+            Log.i("useRR", "Rating to use: " + ratingToUse);
+
+            userSceneIdPlusRR = userSceneId + "RR+";
+
+            Log.i("useRR", "New scene id plus RR: " + userSceneIdPlusRR);
+
+            // check to see if scene exists to prevent crashes
+            mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneIdPlusRR)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            if (dataSnapshot.exists()) {
+                                userSceneId = userSceneIdPlusRR;
+
+                            } else {
+                                // log doesn't exist and return to normal usersceneid
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+        } else if (ratingToUse >= 10) {
+            Log.i("useRR", "Rating to use: " + ratingToUse);
+
+            userSceneIdPlusRR = userSceneId + "RR++";
+            Log.i("useRR", "New scene id plus RR: " + userSceneIdPlusRR);
+        }
     }
 
     // simpley reads and stores Companion name if it's mentioned

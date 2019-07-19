@@ -92,6 +92,7 @@ public class ViewCompanionActivity extends AppCompatActivity
         nameTextview = findViewById(R.id.companion_name);
         nameTextview.setVisibility(View.GONE);
 
+        // load fade in
         fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 
         if ((userId = getUid()) != null) {

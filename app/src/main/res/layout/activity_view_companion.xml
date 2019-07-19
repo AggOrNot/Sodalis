@@ -20,7 +20,8 @@
         android:text="@string/app_name"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold|italic"
-        android:textColor="@color/colorMenuGrey"/>
+        android:textColor="@color/colorMenuGrey"
+        android:background="@drawable/text_over_vid_bg"/>
 
     <ImageView
         android:id="@+id/back_button"
