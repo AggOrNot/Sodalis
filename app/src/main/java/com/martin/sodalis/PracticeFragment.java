@@ -79,6 +79,8 @@ public class PracticeFragment extends Fragment {
     private TextView greetingUserReplyB;
     private TextView greetingUserReplyC;
     private TextView greetingUserReplyD;
+    private TextView userReplyAPremium;
+    private TextView userReplyBPremium;
     private TextView timedEventText;
     private TextView continuePrompt;
     private TextView videoDismiss;
@@ -118,6 +120,10 @@ public class PracticeFragment extends Fragment {
     private String backgroundColorToUse;
     private String audioRef;
     private String videoRef;
+    private String localPremiumAReply;
+    private String localPremiumASceneId;
+    private String localPremiumBReply;
+    private String localPremiumBSceneId;
 
     private String replyAChildBuilder;
     private String replyBChildBuilder;
@@ -130,6 +136,8 @@ public class PracticeFragment extends Fragment {
     private boolean isBackgroundFlagPresent;
     private boolean isModifierFlagPresent;
     private boolean isTimedEventPresent;
+    private boolean isAPremiumPresent;
+    private boolean isBPremiumPresent;
 
     private NumberProgressBar numberProgressBar;
 
@@ -204,15 +212,22 @@ public class PracticeFragment extends Fragment {
         greetingUserReplyA = practiceView.findViewById(R.id.greeting_user_reply_A);
         greetingUserReplyB = practiceView.findViewById(R.id.greeting_user_reply_B);
 
+        userReplyAPremium = practiceView.findViewById(R.id.user_reply_A_premium);
+        userReplyBPremium = practiceView.findViewById(R.id.user_reply_B_premium);
+
         userReplyA.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
         userReplyA.setTextColor(Color.parseColor("#ffffff"));
         greetingUserReplyA.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
         greetingUserReplyA.setTextColor(Color.parseColor("#ffffff"));
+        userReplyAPremium.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
+        userReplyAPremium.setTextColor(Color.parseColor("#ffffff"));
 
         userReplyB.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
         userReplyB.setTextColor(Color.parseColor("#ffffff"));
         greetingUserReplyB.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
         greetingUserReplyB.setTextColor(Color.parseColor("#ffffff"));
+        userReplyBPremium.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
+        userReplyBPremium.setTextColor(Color.parseColor("#ffffff"));
 
         userReplyC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
         userReplyC.setTextColor(Color.parseColor("#ffffff"));
@@ -788,6 +803,12 @@ public class PracticeFragment extends Fragment {
 
         openArticleViewer.clearAnimation();
         openArticleViewer.setVisibility(View.GONE);
+
+        userReplyAPremium.clearAnimation();
+        userReplyAPremium.setVisibility(View.GONE);
+
+        userReplyBPremium.clearAnimation();
+        userReplyBPremium.setVisibility(View.GONE);
     }
 
     public String getUid() {
@@ -800,7 +821,7 @@ public class PracticeFragment extends Fragment {
 
         //fetchAudioUrlFromFirebase();
 
-        checkForModifierFlag();
+        isModifierFlagPresent = checkForModifierFlag();
 
         // set scene id to be used later
         String localUserSceneId = userSceneIdGetter();
@@ -1023,48 +1044,64 @@ public class PracticeFragment extends Fragment {
                                                                             + localSceneIdToUse + " " +
                                                                             "userReplyA" + " " + localReplyIdToUse);
 
-                                                            mDatabaseRef.child("act1")
-                                                                    .child("testIntro_CompanionText")
-                                                                    .child(localSceneIdToUse)
-                                                                    .child("userReplyA")
-                                                                    .child(localReplyIdToUse)
-                                                                    .addListenerForSingleValueEvent(
-                                                                            new ValueEventListener() {
-                                                                                @Override
-                                                                                public void onDataChange
-                                                                                        (DataSnapshot dataSnapshot) {
+                                                            // check to see if premium reply is present
+                                                            if (isModifierFlagPresent) { // is true
 
-                                                                                    String replyString = dataSnapshot
-                                                                                            .getValue().toString();
+                                                                if (checkForPremiumReplyA(localSceneIdToUse, localReplyIdToUse)) {
+                                                                    Log.i("getUserReplyA",
+                                                                            "Firing premium reply");
+                                                                }
 
-                                                                                    if (checkForCompanionNameInText(replyString)) { // is true
+                                                            } else {
 
-                                                                                        Log.i("getUserReplyA",
-                                                                                                "Companion name is present and is: " +
-                                                                                                        companionName);
+                                                                Log.i("getUserReplyA",
+                                                                        "No premium reply, firing " +
+                                                                                "normal reply A");
 
-                                                                                        String newString = replyString
-                                                                                                .replace("companionName", companionName);
+                                                                mDatabaseRef.child("act1")
+                                                                        .child("testIntro_CompanionText")
+                                                                        .child(localSceneIdToUse)
+                                                                        .child("userReplyA")
+                                                                        .child(localReplyIdToUse)
+                                                                        .addListenerForSingleValueEvent(
+                                                                                new ValueEventListener() {
+                                                                                    @Override
+                                                                                    public void onDataChange
+                                                                                            (DataSnapshot dataSnapshot) {
 
-                                                                                        // show the good stuff
-                                                                                        userReplyA.setText
-                                                                                                (newString);
-                                                                                        slideFromRight(userReplyA);
+                                                                                        String replyString = dataSnapshot
+                                                                                                .getValue().toString();
 
-                                                                                    } else { // no occurrence, go to work
-                                                                                        userReplyA.setText
-                                                                                                (replyString);
-                                                                                        slideFromRight(userReplyA);
+                                                                                        if (checkForCompanionNameInText(replyString)) { // is true
+
+                                                                                            Log.i("getUserReplyA",
+                                                                                                    "Companion name is present and is: " +
+                                                                                                            companionName);
+
+                                                                                            String newString = replyString
+                                                                                                    .replace("companionName", companionName);
+
+
+                                                                                            // show the good stuff
+                                                                                            userReplyA.setText(newString);
+                                                                                            slideFromRight(userReplyA);
+
+                                                                                        } else { // no occurrence, go to work
+                                                                                            userReplyA.setText
+                                                                                                    (replyString);
+                                                                                            slideFromRight(userReplyA);
+                                                                                        }
+
                                                                                     }
+                                                                                    @Override
+                                                                                    public void onCancelled
+                                                                                            (DatabaseError databaseError) {
 
+                                                                                    }
                                                                                 }
-                                                                                @Override
-                                                                                public void onCancelled
-                                                                                        (DatabaseError databaseError) {
+                                                                        );
+                                                            }
 
-                                                                                }
-                                                                            }
-                                                                    );
                                                         }
                                                     }
                                                     @Override
@@ -1199,6 +1236,35 @@ public class PracticeFragment extends Fragment {
 
                                                                                     String replyString = dataSnapshot
                                                                                             .getValue().toString();
+
+                                                                                    if (isAPremiumPresent) { // is true
+
+                                                                                        Log.i("getUserReplyB",
+                                                                                                "Premium reply is visible");
+
+                                                                                        // set reply below premium reply
+                                                                                        RelativeLayout.LayoutParams params =
+                                                                                                (RelativeLayout.LayoutParams)
+                                                                                                        userReplyB.getLayoutParams();
+
+                                                                                        params.addRule(RelativeLayout.BELOW,
+                                                                                                R.id.user_reply_A_premium);
+
+                                                                                        userReplyB.setLayoutParams(params);
+
+                                                                                    } else { // reset to original state
+                                                                                        Log.i("getUserReplyB",
+                                                                                                "Premium reply is NOT visible");
+
+                                                                                        RelativeLayout.LayoutParams params =
+                                                                                                (RelativeLayout.LayoutParams)
+                                                                                                userReplyB.getLayoutParams();
+
+                                                                                        params.addRule(RelativeLayout.BELOW,
+                                                                                                R.id.user_reply_A);
+
+                                                                                        userReplyB.setLayoutParams(params);
+                                                                                    }
 
                                                                                     if (checkForCompanionNameInText(replyString)) { // is true
 
@@ -1936,6 +2002,16 @@ public class PracticeFragment extends Fragment {
             Log.i("setNewSceneNumber", "Next Anyway string split into: " + tempSceneBuilder);
         }
 
+        // strip away any RR modifiers to have a clear sceneid slate
+        if (userSceneId.contains("RR+")) {
+
+            tempSceneBuilder = tempSceneBuilder.replace("RR+", "");
+
+        } else if (userSceneId.contains("RR++")) {
+
+            tempSceneBuilder = tempSceneBuilder.replace("RR++", "");
+        }
+
         // sets new scene number to prepare for next one
         sceneNumber += 1;
 
@@ -2323,7 +2399,7 @@ public class PracticeFragment extends Fragment {
         }
     }
 
-    // simpley reads and stores Companion name if it's mentioned
+    // simply reads and stores Companion name if it's mentioned
     public boolean checkForCompanionNameInText(String dataSnapToUse) {
 
         boolean isCompanionNameInText;
@@ -2861,7 +2937,160 @@ public class PracticeFragment extends Fragment {
         );
     }
 
-    // check if internal "news" article exists and launch fragment as needed
+    private boolean checkForPremiumReplyA(String localSceneId, String localReply) {
+
+        localPremiumASceneId = localSceneId;
+        localPremiumAReply = localReply;
+
+        mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)
+                .child("userReplyAPremium").addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        if (dataSnapshot.exists()) {
+                            Log.d("checkPremiumA", "Premium A exists");
+                            isAPremiumPresent = true;
+
+                            mDatabaseRef.child("act1")
+                                    .child("testIntro_CompanionText")
+                                    .child(localPremiumASceneId)
+                                    .child("userReplyAPremium")
+                                    .child(localPremiumAReply)
+                                    .addListenerForSingleValueEvent(
+                                            new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange
+                                                        (DataSnapshot dataSnapshot) {
+
+                                                    String replyString = dataSnapshot
+                                                            .getValue().toString();
+
+                                                    if (checkForCompanionNameInText(replyString)) { // is true
+
+                                                        Log.i("getUserReplyA",
+                                                                "Companion name is present and is: " +
+                                                                        companionName);
+
+                                                        String newString = replyString
+                                                                .replace("companionName", companionName);
+
+                                                        userReplyAPremium
+                                                                .setVisibility(View.VISIBLE);
+                                                        userReplyAPremium
+                                                                .setText(newString);
+                                                        slideFromRight(userReplyAPremium);
+
+                                                    } else { // no occurrence, go to work
+
+                                                        userReplyAPremium
+                                                                .setVisibility(View.VISIBLE);
+                                                        userReplyAPremium
+                                                                .setText(replyString);
+                                                        slideFromRight(userReplyAPremium);
+                                                    }
+                                                }
+                                                @Override
+                                                public void onCancelled
+                                                        (DatabaseError databaseError) {
+                                                }
+                                            }
+                                    );
+                        } else {
+                            Log.d("checkPremiumA", "Premium A does NOT exist");
+                            isAPremiumPresent = false;
+
+                            mDatabaseRef.child("act1")
+                                    .child("testIntro_CompanionText")
+                                    .child(localPremiumASceneId)
+                                    .child("userReplyA")
+                                    .child(localPremiumAReply)
+                                    .addListenerForSingleValueEvent(
+                                            new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange
+                                                        (DataSnapshot dataSnapshot) {
+
+                                                    String replyString = dataSnapshot
+                                                            .getValue().toString();
+
+                                                    if (checkForCompanionNameInText(replyString)) { // is true
+
+                                                        Log.i("getUserReplyA",
+                                                                "Companion name is present and is: " +
+                                                                        companionName);
+
+                                                        String newString = replyString
+                                                                .replace("companionName", companionName);
+
+                                                        // show the good stuff
+                                                        userReplyA.setText(newString);
+                                                        slideFromRight(userReplyA);
+
+                                                    } else { // no occurrence, go to work
+                                                        userReplyA.setText
+                                                                (replyString);
+                                                        slideFromRight(userReplyA);
+                                                    }
+                                                }
+                                                @Override
+                                                public void onCancelled
+                                                        (DatabaseError databaseError) {
+
+                                                }
+                                            }
+                                    );
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                }
+        );
+
+        userReplyAPremium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                companionText.startAnimation(fadeOut);
+                fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                        userReplyAPremium.clearAnimation();
+                        userReplyAPremium.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        showTypingAnimation();
+
+                        setNewSceneReplyId(getReplyAChildBuilder());
+                        createNewSceneId(tempSceneBuilder, getReplyAChildBuilder());
+
+                        buildNewSceneReplyId(userSceneId, getReplyAChildBuilder());
+
+                        getCompanionText();
+                        getUserReplyA();
+                        getUserReplyB();
+                        getUserReplyC();
+                        getUserReplyD();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                    }
+                });
+            }
+        });
+        return isAPremiumPresent;
+    }
+
+    private void checkForPremiumReplyB() {
+
+    }
+
+    // check if internal "news" article exists and launch activity as needed
     private void checkForArticleContent() {
 
         mDatabaseRef.child("act1").child("testIntro_CompanionText").child(userSceneId)

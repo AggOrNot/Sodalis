@@ -76,8 +76,10 @@ public class ChooseOutfitActivity extends AppCompatActivity {
         backToAppearancesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iAppearances = new Intent(getApplicationContext(), PurchaseAppearancesActivity.class);
-                startActivity(iAppearances);
+
+                // not sure if this should be the correct behavior rn. Keep finish for now
+                /*Intent iAppearances = new Intent(getApplicationContext(), PurchaseAppearancesActivity.class);
+                startActivity(iAppearances);*/
                 finish();
             }
         });
